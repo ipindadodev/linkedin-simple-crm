@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('name');
             $table->text('description');
+            $table->string('color')->default('#ffffff');
             $table->timestamps();
         });
     }
