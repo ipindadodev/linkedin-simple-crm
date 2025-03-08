@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     // Prospect Status CRUD
     Route::get('/prospect-statuses', ProspectStatusIndex::class)->name('prospect-statuses.index');
     Route::get('/prospect-statuses/create', ProspectStatusCreate::class)->name('prospect-statuses.create');
-    Route::get('/prospect-statuses/edit/{id}', ProspectStatusEdit::class)->name('prospect-statuses.edit');
+    Route::get('/prospect-statuses/edit/{status}', ProspectStatusEdit::class)->name('prospect-statuses.edit');
 
     // Sequences CRUD
     Route::get('/sequences', SequenceIndex::class)->name('sequences.index');
