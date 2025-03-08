@@ -13,8 +13,14 @@
 
     <livewire:components.table 
         model="App\Models\ProspectStatus"
-        :columns="['code' => __('Code'), 'name' => __('Name'), 'description' => __('Description'), 'color' => __('Color')]"
+        :columns="[
+            'code' => __('Code'), 
+            'name' => __('Name'), 
+            'description' => __('Description'), 
+            'color' => __('Color')
+        ]"
         :sortable="['name', 'code']"
+        :searchable="['code', 'name', 'description']"
         :allowEditing="true"
         :allowDeleting="true"
     />
