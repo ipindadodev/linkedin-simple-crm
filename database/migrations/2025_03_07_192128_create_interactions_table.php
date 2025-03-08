@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('interactions', function (Blueprint $table) {
             $table->id();
+            // Relationship with the prospects table
+            $table->foreignId('prospect_id')->constrained('prospects')->cascadeOnDelete();
+            
+            $table->string('title');
+            $table->text('description');            
             $table->timestamps();
         });
+        
     }
 
     /**
