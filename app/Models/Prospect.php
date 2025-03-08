@@ -19,30 +19,35 @@ class Prospect extends Model
         'industry_id',
     ];
 
+    // Relationship with ProspectStatus (One to One)
     // Relación con ProspectStatus (Uno a Uno)
     public function status()
     {
         return $this->belongsTo(ProspectStatus::class, 'status_id');
     }
 
+    // Relationship with ProspectLocation (One to One)
     // Relación con ProspectLocation (Uno a Uno)
     public function location()
     {
         return $this->belongsTo(ProspectLocation::class, 'location_id');
     }
 
+    // Relationship with ProspectIndustry (One to One)
     // Relación con ProspectIndustry (Uno a Uno)
     public function industry()
     {
         return $this->belongsTo(ProspectIndustry::class, 'industry_id');
     }
 
+    // Relationship with Interactions (One to Many)
     // Relación con Interactions (Uno a Muchos)
     public function interactions()
     {
         return $this->hasMany(Interaction::class);
     }
 
+    // Relationship with Sequences (Many to Many)
     // Relación con Sequences (Muchos a Muchos)
     public function sequences()
     {
