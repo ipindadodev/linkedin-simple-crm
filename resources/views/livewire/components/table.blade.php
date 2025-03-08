@@ -2,7 +2,12 @@
     <!-- Barra de búsqueda -->
     @if (!empty($searchable))
         <div class="mb-4 flex justify-between items-center">
-            <flux:input icon="magnifying-glass" wire:model.live="search" placeholder="{{ __('Search...') }}" class="w-64" />
+            <flux:input 
+                icon="magnifying-glass" 
+                wire:model.live="search" 
+                placeholder="{{ __('Search...') }}" 
+                class="w-64" 
+            />
         </div>
     @endif
 
@@ -56,14 +61,13 @@
                                 @endif
 
                                 @if ($allowDeleting)
-                                    <flux:button 
-                                        type="button" 
-                                        variant="danger" 
-                                        size="sm" 
-                                        wire:click="$dispatch('delete-item', { model: '{{ addslashes($model) }}', id: {{ $row['id'] }} })"
+                                    <button 
+                                        type="button"
+                                        class="btn btn-danger"
+                                        wire:click="triggerDelete('{{ addslashes($model) }}', {{ $row['id'] }})"
                                     >
                                         {{ __('Delete') }}
-                                    </flux:button>
+                                    </button>
                                 @endif
                             </td>
                         @endif
@@ -79,9 +83,6 @@
         </table>
 
         <div class="bg-gray-100 dark:bg-gray-800 px-4 py-3 flex justify-between items-center rounded-b-xl">
-            {{-- <span class="text-sm text-gray-600 dark:text-gray-300">
-                {{ __('Showing') }} {{ $data->firstItem() ?? 0 }} - {{ $data->lastItem() ?? 0 }} {{ __('of') }} {{ $data->total() }}
-            </span> --}}
             <div>
                 {{ $data->links() }}
             </div>
