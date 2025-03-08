@@ -1,30 +1,21 @@
 <?php
 
-namespace App\Livewire\Components;
+namespace App\Livewire\ProspectStatuses;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\ProspectStatus;
 
-class Table extends Component
+class Index extends Component
 {
     use WithPagination;
 
-    public $model;
-    public $columns;
-    public $sortable = [];
-    public $sortBy = 'id';
+    public $sortBy = 'name';
     public $sortDirection = 'asc';
-    public $allowEditing = false;
-    public $allowDeleting = false;
-    public $search = ''; // Campo de búsqueda
-    public $searchable = []; // Columnas donde se puede buscar
+    public $showDeleteModal = false;
+    public $deleteId = null;
 
-    protected $queryString = ['search']; // Guarda la búsqueda en la URL
-
-    public function mount()
-    {
-        $this->sortBy = $this->sortable[0] ?? 'id'; // Orden predeterminado
-    }
+    protected $listeners = ['confirmDelete']; // 👈 Escucha el evento
 
     public function sort($column)
     {
@@ -36,33 +27,31 @@ class Table extends Component
         }
     }
 
-    public function updatingSearch()
+    #[\Livewire\Attributes\Computed]
+    public function statuses()
     {
-        if (strlen($this->search) < 2) {
-            return; // No filtrar hasta que haya al menos 2 caracteres
-        }
-        $this->resetPage(); // Resetear la paginación al buscar
+        return ProspectStatus::orderBy($this->sortBy, $this->sortDirection)->paginate(6);
     }
 
-    #[\Livewire\Attributes\Computed]
-    public function data()
+    public function confirmDelete($id)
     {
-        return $this->model::query()
-            ->when(strlen($this->search) >= 2 && count($this->searchable) > 0, function ($query) {
-                $query->where(function ($subQuery) {
-                    foreach ($this->searchable as $column) {
-                        $subQuery->orWhere($column, 'LIKE', '%' . $this->search . '%');
-                    }
-                });
-            })
-            ->orderBy($this->sortBy, $this->sortDirection)
-            ->paginate(10);
+        $this->deleteId = $id;
+        $this->showDeleteModal = true;
+    }
+
+    public function delete()
+    {
+        if ($this->deleteId) {
+            ProspectStatus::findOrFail($this->deleteId)->delete();
+            session()->flash('message', __('Prospect status deleted successfully.'));
+            $this->reset(['showDeleteModal', 'deleteId']);
+        }
     }
 
     public function render()
     {
-        return view('livewire.components.table', [
-            'data' => $this->data,
+        return view('livewire.prospect-statuses.index', [
+            'statuses' => $this->statuses(),
         ]);
     }
 }

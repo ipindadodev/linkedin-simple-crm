@@ -56,7 +56,7 @@
                                 @endif
 
                                 @if ($allowDeleting)
-                                    <flux:button type="button" variant="danger" size="sm" wire:click="confirmDelete({{ $row['id'] }})">
+                                    <flux:button type="button" variant="danger" size="sm" wire:click="$emit('confirmDelete', {{ $row['id'] }})">
                                         {{ __('Delete') }}
                                     </flux:button>
                                 @endif
