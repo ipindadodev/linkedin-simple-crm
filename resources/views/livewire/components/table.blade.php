@@ -60,7 +60,7 @@
                                         type="button" 
                                         variant="danger" 
                                         size="sm" 
-                                        wire:click="$dispatch('delete-item', { model: '{{ $model }}', id: {{ $row['id'] }} })"
+                                        wire:click="$dispatch('delete-item', { model: '{{ addslashes($model) }}', id: {{ $row['id'] }} })"
                                     >
                                         {{ __('Delete') }}
                                     </flux:button>
