@@ -52,5 +52,7 @@
     "Create prospect status": "Crear estado del prospecto",
     "Choose a status color": "Elige un color",
     "Are you sure?": "¿Estás seguro?",
-    "This action cannot be undone.": "Esta acción no se puede deshacer."
+    "This action cannot be undone.": "Esta acción no se puede deshacer.",
+    "Edit prospect status": "Editar estado del prospecto",
+    "Prospect status updated successfully.": "Estado de prospecto actualizado correctamente."
 }
