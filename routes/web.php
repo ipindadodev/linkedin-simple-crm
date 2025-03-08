@@ -1,35 +1,35 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
+use App\Http\Middleware\SetLocale;
 use Livewire\Volt\Volt;
 
-// Importar componentes de Livewire
-use App\Http\Livewire\Prospects\Index as ProspectIndex;
-use App\Http\Livewire\Prospects\Create as ProspectCreate;
-use App\Http\Livewire\Prospects\Edit as ProspectEdit;
+use App\Livewire\Prospects\Index as ProspectIndex;
+use App\Livewire\Prospects\Create as ProspectCreate;
+use App\Livewire\Prospects\Edit as ProspectEdit;
 
-use App\Http\Livewire\ProspectStatuses\Index as ProspectStatusIndex;
-use App\Http\Livewire\ProspectStatuses\Create as ProspectStatusCreate;
-use App\Http\Livewire\ProspectStatuses\Edit as ProspectStatusEdit;
+use App\Livewire\ProspectStatuses\Index as ProspectStatusIndex;
+use App\Livewire\ProspectStatuses\Create as ProspectStatusCreate;
+use App\Livewire\ProspectStatuses\Edit as ProspectStatusEdit;
 
-use App\Http\Livewire\Sequences\Index as SequenceIndex;
-use App\Http\Livewire\Sequences\Create as SequenceCreate;
-use App\Http\Livewire\Sequences\Edit as SequenceEdit;
-use App\Http\Livewire\Sequences\Show as SequenceShow;
+use App\Livewire\Sequences\Index as SequenceIndex;
+use App\Livewire\Sequences\Create as SequenceCreate;
+use App\Livewire\Sequences\Edit as SequenceEdit;
 
-use App\Http\Livewire\Sequences\SequencePoints\Index as SequencePointIndex;
-use App\Http\Livewire\Sequences\SequencePoints\Create as SequencePointCreate;
-use App\Http\Livewire\Sequences\SequencePoints\Edit as SequencePointEdit;
+use App\Livewire\SequencePoints\Index as SequencePointIndex;
+use App\Livewire\SequencePoints\Create as SequencePointCreate;
+use App\Livewire\SequencePoints\Edit as SequencePointEdit;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
+// Dashboard protegido por autenticación
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+    Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+// Grupo de rutas de ajustes (Volt)
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
@@ -38,31 +38,31 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
-// 📌 Prospects CRUD
-Route::middleware(['auth'])->prefix('prospects')->name('prospects.')->group(function () {
-    Route::get('/', Livewire::mount(ProspectIndex::class))->name('index');
-    Route::get('/create', Livewire::mount(ProspectCreate::class))->name('create');
-    Route::get('/edit/{id}', Livewire::mount(ProspectEdit::class))->name('edit');
+
+Route::middleware(['auth'])->group(function () {
+    Route::view('dashboard', 'dashboard')->name('dashboard');
+
+    // Prospects CRUD
+    Route::get('/prospects', ProspectIndex::class)->name('prospects.index');
+    Route::get('/prospects/create', ProspectCreate::class)->name('prospects.create');
+    Route::get('/prospects/edit/{id}', ProspectEdit::class)->name('prospects.edit');
+
+    // Prospect Status CRUD
+    Route::get('/prospect-statuses', ProspectStatusIndex::class)->name('prospect-statuses.index');
+    Route::get('/prospect-statuses/create', ProspectStatusCreate::class)->name('prospect-statuses.create');
+    Route::get('/prospect-statuses/edit/{id}', ProspectStatusEdit::class)->name('prospect-statuses.edit');
+
+    // Sequences CRUD
+    Route::get('/sequences', SequenceIndex::class)->name('sequences.index');
+    Route::get('/sequences/create', SequenceCreate::class)->name('sequences.create');
+    Route::get('/sequences/edit/{id}', SequenceEdit::class)->name('sequences.edit');
+
+    // Sequence Points CRUD
+    Route::get('/sequence-points', SequencePointIndex::class)->name('sequence-points.index');
+    Route::get('/sequence-points/create', SequencePointCreate::class)->name('sequence-points.create');
+    Route::get('/sequence-points/edit/{id}', SequencePointEdit::class)->name('sequence-points.edit');
 });
 
-// 📌 Prospect Statuses CRUD
-Route::middleware(['auth'])->prefix('prospect-statuses')->name('prospect-statuses.')->group(function () {
-    Route::get('/', Livewire::mount(ProspectStatusIndex::class))->name('index');
-    Route::get('/create', Livewire::mount(ProspectStatusCreate::class))->name('create');
-    Route::get('/edit/{id}', Livewire::mount(ProspectStatusEdit::class))->name('edit');
-});
 
-// 📌 Sequences CRUD
-Route::middleware(['auth'])->prefix('sequences')->name('sequences.')->group(function () {
-    Route::get('/', Livewire::mount(SequenceIndex::class))->name('index');
-    Route::get('/create', Livewire::mount(SequenceCreate::class))->name('create');
-    Route::get('/edit/{id}', Livewire::mount(SequenceEdit::class))->name('edit');
-    Route::get('/show/{id}', Livewire::mount(SequenceShow::class))->name('show');
-});
-
-// 📌 Sequence Points CRUD (Nested inside sequences)
-Route::middleware(['auth'])->prefix('sequences/{sequence}/points')->name('sequences.points.')->group(function () {
-    Route::get('/', Livewire::mount(SequencePointIndex::class))->name('index');
-    Route::get('/create', Livewire::mount(SequencePointCreate::class))->name('create');
-    Route::get('/edit/{id}', Livewire::mount(SequencePointEdit::class))->name('edit');
-});
+// Autenticación
+require __DIR__.'/auth.php';
