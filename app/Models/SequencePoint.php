@@ -15,7 +15,7 @@ class SequencePoint extends Model
         'message',
         'time_type',
         'day_of_week',
-        'day_of_month',
+        'day_of_month' => 'integer',
         'days_after_start',
         'days_after_previous',
         'goal',
