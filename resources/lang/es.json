@@ -36,5 +36,21 @@
     "Register": "Registro de usuario",
     "Choose language...": "Seleccionar idioma...",
     "English": "Inglés",
-    "Spanish": "Español"
+    "Spanish": "Español",
+    "Prospect status deleted successfully.": "Estado de prospecto eliminado correctamente.",
+    "Create new": "Crear nuevo",
+    "Name": "Nombre",
+    "Description": "Descripción",
+    "Color": "Color",
+    "Actions": "Acciones",
+    "Edit": "Editar",
+    "Delete": "Eliminar",
+    "Cancel": "Cancelar",
+    "Code": "Código",
+    "Showing": "Mostrando",
+    "of": "de",
+    "Create prospect status": "Crear estado del prospecto",
+    "Choose a status color": "Elige un color",
+    "Are you sure?": "¿Estás seguro?",
+    "This action cannot be undone.": "Esta acción no se puede deshacer."
 }
