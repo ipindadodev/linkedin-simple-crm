@@ -4,21 +4,27 @@ namespace App\Livewire\Components;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Session;
 
 class Table extends Component
 {
     use WithPagination;
 
     public $model;
-    public $columns = [];
+    public $columns;
     public $sortable = [];
     public $sortBy = 'id';
     public $sortDirection = 'asc';
     public $allowEditing = false;
-    public $allowDeleting = false; // Nuevo: Controla si se puede eliminar
-    public $showDeleteModal = false;
-    public $deleteId;
+    public $allowDeleting = false;
+    public $search = ''; // Campo de búsqueda
+    public $searchable = []; // Columnas donde se puede buscar
+
+    protected $queryString = ['search']; // Guarda la búsqueda en la URL
+
+    public function mount()
+    {
+        $this->sortBy = $this->sortable[0] ?? 'id'; // Orden predeterminado
+    }
 
     public function sort($column)
     {
@@ -30,30 +36,33 @@ class Table extends Component
         }
     }
 
-    public function confirmDelete($id)
+    public function updatingSearch()
     {
-        $this->deleteId = $id;
-        $this->showDeleteModal = true;
+        if (strlen($this->search) < 2) {
+            return; // No filtrar hasta que haya al menos 2 caracteres
+        }
+        $this->resetPage(); // Resetear la paginación al buscar
     }
 
-    public function deleteStatus()
+    #[\Livewire\Attributes\Computed]
+    public function data()
     {
-        if ($this->deleteId && $this->allowDeleting) {
-            $modelInstance = app($this->model)::find($this->deleteId);
-            if ($modelInstance) {
-                $modelInstance->delete();
-                Session::flash('message', __('Prospect status deleted successfully.'));
-            }
-        }
-        $this->showDeleteModal = false;
+        return $this->model::query()
+            ->when(strlen($this->search) >= 2 && count($this->searchable) > 0, function ($query) {
+                $query->where(function ($subQuery) {
+                    foreach ($this->searchable as $column) {
+                        $subQuery->orWhere($column, 'LIKE', '%' . $this->search . '%');
+                    }
+                });
+            })
+            ->orderBy($this->sortBy, $this->sortDirection)
+            ->paginate(10);
     }
 
     public function render()
     {
-        $data = app($this->model)::orderBy($this->sortBy, $this->sortDirection)->paginate(10);
-
         return view('livewire.components.table', [
-            'data' => $data,
+            'data' => $this->data,
         ]);
     }
 }
