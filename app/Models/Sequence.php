@@ -13,10 +13,10 @@ class Sequence extends Model
 
     // Relationship with SequencePoints (One to Many)
     // Relación con SequencePoints (Uno a Muchos)
-    public function sequencePoints()
+    public function sequence_points()
     {
         return $this->hasMany(SequencePoint::class);
-    }
+    }    
 
     // Relationship with Prospects (Many to Many)
     // Relación con Prospects (Muchos a Muchos)
