@@ -9,6 +9,8 @@ class ProspectStatus extends Model
 {
     use HasFactory;
 
+    protected $table = 'prospect_statuses';
+
     protected $fillable = ['code', 'name', 'description'];
 
     // Relationship with Prospects (One to Many)
