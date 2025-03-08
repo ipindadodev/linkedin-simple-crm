@@ -37,6 +37,7 @@
                     icon-trailing="chevrons-up-down"
                 />
 
+
                 <flux:menu class="w-[220px]">
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
@@ -57,6 +58,7 @@
                         </div>
                     </flux:menu.radio.group>
 
+                    
                     <flux:menu.separator />
 
                     <flux:menu.radio.group>
@@ -119,7 +121,7 @@
         </flux:header>
 
         {{ $slot }}
-
+        
         @fluxScripts
     </body>
 </html>
