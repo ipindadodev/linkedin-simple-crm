@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('prospect_locations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('code');
+            $table->string('name');
             $table->timestamps();
         });
     }
