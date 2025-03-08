@@ -1,7 +1,16 @@
 {
-    "Dashboard": "Tablero",
+    "Dashboard": "Escritorio",
     "Appearance": "Apariencia",
     "Update the appearance settings for your account": "Actualiza la apariencia de tu cuenta",
+    "Manage your profile and account settings": "Administra tu perfil y configuración de cuenta",
+    "Update password": "Actualizar contraseña",
+    "Ensure your account is using a long, random password to stay secure": "Asegúrate de que tu cuenta esté utilizando una contraseña larga y aleatoria para mantenerla segura",
+    "Current password": "Contraseña actual",
+    "New password": "Nueva contraseña",
+    "Confirm password": "Confirmar contraseña",
+    "Save": "Guardar",
+    "Delete account": "Eliminar mi cuenta",
+    "Delete your account and all of its resources": "Elimina tu cuenta y todos sus recursos",
     "Language": "Idioma",
     "Light": "Claro",
     "Dark": "Oscuro",
@@ -10,7 +19,7 @@
     "Profile": "Perfil",
     "Password": "Contraseña",
     "Prospects": "Prospectos",
-    "Prospects statuses": "Estados de prospecto",
+    "Prospect statuses": "Estados de prospecto",
     "Sequences": "Secuencias",
     "Sequence points": "Puntos de secuencia",
     "Log Out": "Cerrar sesión",
@@ -24,5 +33,8 @@
     "Don't have an account?": "¿No tienes una cuenta?",
     "Sign up": "Regístrate",
     "Login": "Iniciar sesión",
-    "Register": "Registro de usuario"
+    "Register": "Registro de usuario",
+    "Choose language...": "Seleccionar idioma...",
+    "English": "Inglés",
+    "Spanish": "Español"
 }
