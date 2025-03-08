@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ProspectStatusSeeder::class,
             ProspectLocationSeeder::class,
+            ProspectIndustrySeeder::class,
         ]);
     }    
 }
