@@ -56,7 +56,12 @@
                                 @endif
 
                                 @if ($allowDeleting)
-                                    <flux:button type="button" variant="danger" size="sm" wire:click="$emit('confirmDelete', {{ $row['id'] }})">
+                                    <flux:button 
+                                        type="button" 
+                                        variant="danger" 
+                                        size="sm" 
+                                        wire:click="$dispatch('delete-item', { model: '{{ $model }}', id: {{ $row['id'] }} })"
+                                    >
                                         {{ __('Delete') }}
                                     </flux:button>
                                 @endif
@@ -74,9 +79,9 @@
         </table>
 
         <div class="bg-gray-100 dark:bg-gray-800 px-4 py-3 flex justify-between items-center rounded-b-xl">
-            <span class="text-sm text-gray-600 dark:text-gray-300">
+            {{-- <span class="text-sm text-gray-600 dark:text-gray-300">
                 {{ __('Showing') }} {{ $data->firstItem() ?? 0 }} - {{ $data->lastItem() ?? 0 }} {{ __('of') }} {{ $data->total() }}
-            </span>
+            </span> --}}
             <div>
                 {{ $data->links() }}
             </div>
