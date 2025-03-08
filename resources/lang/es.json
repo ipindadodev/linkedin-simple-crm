@@ -54,5 +54,8 @@
     "Are you sure?": "¿Estás seguro?",
     "This action cannot be undone.": "Esta acción no se puede deshacer.",
     "Edit prospect status": "Editar estado del prospecto",
-    "Prospect status updated successfully.": "Estado de prospecto actualizado correctamente."
+    "Prospect status updated successfully.": "Estado de prospecto actualizado correctamente.",
+    "Prospect status created successfully!": "¡Estado de prospecto creado correctamente!",
+    "Search...": "Buscar...",
+    "No results found": "No se encontraron resultados"
 }
