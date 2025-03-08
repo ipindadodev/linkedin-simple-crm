@@ -15,6 +15,16 @@
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
+                
+                <flux:navlist.group :heading="__('Prospects management')" class="grid">
+                    <flux:navlist.item icon="users" :href="route('prospects.index')" :current="request()->routeIs('prospects.*')" wire:navigate>{{ __('Prospects') }}</flux:navlist.item>
+                    <flux:navlist.item icon="clipboard-document" :href="route('prospect-statuses.index')" :current="request()->routeIs('prospect-statuses.*')" wire:navigate>{{ __('Prospect statuses') }}</flux:navlist.item>
+                </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Sequences')" class="grid">
+                    <flux:navlist.item icon="link" :href="route('sequences.index')" :current="request()->routeIs('sequences.*')" wire:navigate>{{ __('Sequences') }}</flux:navlist.item>
+                    <flux:navlist.item icon="bell" :href="route('sequence-points.index')" :current="request()->routeIs('sequence-points.*')" wire:navigate>{{ __('Sequence points') }}</flux:navlist.item>
+                </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
@@ -68,23 +78,16 @@
         <!-- Mobile User Menu -->
         <flux:header class="lg:hidden">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
-
             <flux:spacer />
-
             <flux:dropdown position="top" align="end">
-                <flux:profile
-                    :initials="auth()->user()->initials()"
-                    icon-trailing="chevron-down"
-                />
+                <flux:profile :initials="auth()->user()->initials()" icon-trailing="chevron-down" />
 
                 <flux:menu>
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                                    <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
-                                    >
+                                    <span class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
                                         {{ auth()->user()->initials() }}
                                     </span>
                                 </span>
