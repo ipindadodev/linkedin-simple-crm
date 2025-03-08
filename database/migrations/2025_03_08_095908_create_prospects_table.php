@@ -13,19 +13,22 @@ return new class extends Migration
     {
         Schema::create('prospects', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname');
-            $table->string('first_lastname')->nullable();
-            $table->string('second_lastname')->nullable();
-            $table->text('linkedin_profile_url');
-
-            // Relación con prospect_locations
-
-            // Relación con prospect_statuses
-
-            // Relación con prospect_industries
-            
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('second_last_name')->nullable();
+            $table->text('linkedin_url');
+        
+            // Foreign keys
+            // Relationship with the prospect_locations table
+            $table->foreignId('location_id')->constrained('prospect_locations')->cascadeOnDelete();
+            // Relationship with the prospect_statuses table
+            $table->foreignId('status_id')->constrained('prospect_statuses')->cascadeOnDelete();
+            // Relationship with the prospect_industries table
+            $table->foreignId('industry_id')->constrained('prospect_industries')->cascadeOnDelete();
+        
             $table->timestamps();
         });
+        
     }
 
     /**
