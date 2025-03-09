@@ -11,7 +11,7 @@ class ProspectStatus extends Model
 
     protected $table = 'prospect_statuses';
 
-    protected $fillable = ['code', 'name', 'description'];
+    protected $fillable = ['code', 'name', 'description', 'color'];
 
     // Relationship with Prospects (One to Many)
     // Relación con Prospects (Uno a Muchos)
