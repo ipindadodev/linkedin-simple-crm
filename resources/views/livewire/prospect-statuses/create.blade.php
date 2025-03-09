@@ -1,4 +1,4 @@
-<div class="max-w-lg mx-auto bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md">
+<div class="w-full mx-auto bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md">
     <flux:heading size="lg" class="mb-6 text-center">{{ __('Create prospect status') }}</flux:heading>
 
     <form wire:submit="save">
