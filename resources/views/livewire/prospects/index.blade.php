@@ -13,7 +13,8 @@
 
     <livewire:components.table 
         model="App\Models\Prospect"
-        editRoute="prospects.edit" 
+        editRoute="prospects.edit"
+        viewRoute="prospects.show"
         :columns="[
             'id' => __('ID'),
             'first_name' => __('First name'),
@@ -27,12 +28,11 @@
         :searchable="['first_name', 'last_name', 'second_last_name']"
         :allowEditing="true"
         :allowDeleting="true"
+        :allowViewing="true"
         :relations="[
             'location_id' => ['relation' => 'location', 'field' => 'name'],
             'status_id' => ['relation' => 'status', 'field' => 'name'],    
             'industry_id' => ['relation' => 'industry', 'field' => 'name'],
         ]"
     />
-
-
 </div>
