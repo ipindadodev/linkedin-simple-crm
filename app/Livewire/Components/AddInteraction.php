@@ -15,15 +15,19 @@ class AddInteraction extends Component
     public string $created_at = '';
     public string $updated_at = '';
 
-    protected $listeners = ['editInteraction', 'setProspectId'];
+    protected $listeners = ['editInteraction', 'setProspectId', 'openModal'];
 
     public function setProspectId($prospectId)
     {
         $this->prospectId = $prospectId;
     }
 
-    public function openModal(?int $interactionId = null)
+    public function openModal(?int $interactionId = null, ?int $prospectId = null)
     {
+        if ($prospectId) {
+            $this->prospectId = $prospectId;
+        }
+
         $this->interactionId = $interactionId;
 
         if ($interactionId) {
@@ -51,6 +55,10 @@ class AddInteraction extends Component
             'description' => 'nullable|string',
         ]);
 
+        if (!$this->prospectId) {
+            throw new \Exception("Prospect ID is missing.");
+        }
+
         if ($this->interactionId) {
             $interaction = Interaction::findOrFail($this->interactionId);
             $interaction->update([
@@ -72,13 +80,11 @@ class AddInteraction extends Component
     public function editInteraction($interactionId)
     {
         if (is_array($interactionId)) {
-            $interactionId = $interactionId[0]; // Extrae el ID si viene en array
+            $interactionId = $interactionId[0];
         }
         
         $this->openModal($interactionId);
     }
-    
-    
 
     public function render()
     {

@@ -38,20 +38,19 @@
     <!-- Sección de Interacciones -->
     <div class="flex justify-between items-center mb-4">
         <flux:heading>{{ __('Interactions') }}</flux:heading>
-        <livewire:components.add-interaction />
+        <flux:button wire:click="$dispatch('openModal', [null, {{ $prospect->id }}])" variant="primary">
+            {{ __('Add interaction') }}
+        </flux:button>
     </div>
 
     <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow max-h-96 overflow-y-auto">
         @forelse ($prospect->interactions as $interaction)
             <div class="border-b last:border-0 pb-3 mb-3">
-                <!-- ✅ Click en el título para abrir el modal de edición -->
                 <p class="text-lg font-semibold text-primary-600 dark:text-primary-400 cursor-pointer hover:underline"
-                    wire:click="dispatch('editInteraction', [{{ $interaction->id }}])">
+                   wire:click="$dispatch('editInteraction', [{{ $interaction->id }}])">
                     {{ $interaction->title }}
                 </p>
                 <p class="text-gray-700 dark:text-gray-300">{{ $interaction->description }}</p>
-                
-                <!-- ✅ Timestamps de creación y actualización -->
                 <p class="text-gray-500 dark:text-gray-400 text-sm mt-2">
                     {{ __('Created at:') }} {{ $interaction->created_at->format('d/m/Y H:i') }}<br>
                     {{ __('Updated at:') }} {{ $interaction->updated_at->format('d/m/Y H:i') }}
@@ -62,7 +61,7 @@
         @endforelse
     </div>
 
-    <!-- Sección de Secuencias -->
+    <!-- Sección de Secuencias (Restaurado) -->
     <flux:heading class="mb-4 mt-6">{{ __('Sequences') }}</flux:heading>
     <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
         @forelse ($prospect->sequences as $sequence)
