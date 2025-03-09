@@ -15,7 +15,7 @@ class ProspectStatusesIndex extends Component // 👈 Nombre corregido
     public $showDeleteModal = false;
     public $deleteId = null;
 
-    protected $listeners = ['delete-item' => 'handleDelete', 'refreshTable' => '$refresh'];
+    protected $listeners = ['deleteItem' => 'handleDelete'];
 
     public function sort($column)
     {
@@ -33,14 +33,19 @@ class ProspectStatusesIndex extends Component // 👈 Nombre corregido
         return ProspectStatus::orderBy($this->sortBy, $this->sortDirection)->paginate(6);
     }
 
-    public function handleDelete($model, $id)
+    public function handleDelete($payload = null)
     {
-        // Verificamos si el modelo recibido es el correcto
+        if (!$payload) {
+            return;
+        }
+        
+        $model = $payload['model'] ?? null;
+        $id = $payload['id'] ?? null;
+    
         if ($model !== ProspectStatus::class) {
-            return; // Si no es ProspectStatus, ignoramos la eliminación
+            return;
         }
     
-        // Buscamos el registro en la base de datos
         $status = ProspectStatus::find($id);
     
         if (!$status) {
@@ -48,13 +53,13 @@ class ProspectStatusesIndex extends Component // 👈 Nombre corregido
             return;
         }
     
-        // Eliminamos el registro
         $status->delete();
         session()->flash('message', __('Prospect status deleted successfully.'));
     
-        // Emitimos un evento para refrescar la tabla
-        $this->dispatch('refresh-table');
+        // Emitir evento para refrescar la tabla
+        $this->dispatchBrowserEvent('refreshTable');
     }
+    
 
     public function render()
     {
