@@ -21,7 +21,7 @@
     "Prospects": "Prospectos",
     "Prospect statuses": "Estados de prospecto",
     "Sequences": "Secuencias",
-    "Sequence points": "Puntos de secuencia",
+    "Sequence points": "Puntos de la secuencia",
     "Log Out": "Cerrar sesión",
     "Platform": "Plataforma",
     "Prospects management": "Gestión de prospectos",
@@ -86,5 +86,15 @@
     "New interaction": "Nueva interacción",
     "Title": "Título",
     "Created at:": "Creado el",
-    "Updated at:": "Actualizado el"
+    "Updated at:": "Actualizado el",
+    "View": "Ver",
+    "Step": "Paso",
+    "Message:": "Mensaje:",
+    "Type": "Tipo",
+    "Day": "Día",
+    "After start:": "Después del comienzo",
+    "After previous:": "Después del anterior",
+    "days": "días",
+    "No sequence points assigned.": "No existen puntos de secuencia asignados.",
+    "Edit sequence": "Editar secuencia"
 }
