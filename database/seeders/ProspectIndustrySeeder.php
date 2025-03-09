@@ -14,7 +14,7 @@ class ProspectIndustrySeeder extends Seeder
      */
     public function run(): void
     {
-        $industrues = [
+        $industries = [
             [ '1' , 'Fabricación de abrasivos y minerales no metálicos' ],
             [ '2' , 'Servicios de alojamiento' ],
             [ '3' , 'Contabilidad' ],
@@ -434,7 +434,7 @@ class ProspectIndustrySeeder extends Seeder
             [ '417' , 'Zoológicos y jardines botánicos' ],
         ];
 
-        foreach ($industrues as $industry) {
+        foreach ($industries as $industry) {
             ProspectIndustry::create([
                 'id' => $industry[0],
                 'name' => $industry[1],
