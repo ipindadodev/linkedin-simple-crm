@@ -12,6 +12,8 @@ use App\Livewire\SequencePoints\SequencePointsIndex;
 
 use App\Livewire\Prospects\Create as ProspectCreate;
 use App\Livewire\Prospects\Edit as ProspectEdit;
+use App\Livewire\Prospects\Show as ProspectShow;
+
 use App\Livewire\ProspectStatuses\Create as ProspectStatusCreate;
 use App\Livewire\ProspectStatuses\Edit as ProspectStatusEdit;
 
@@ -47,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/prospects', ProspectsIndex::class)->name('prospects.index');
     Route::get('/prospects/create', ProspectCreate::class)->name('prospects.create');
     Route::get('/prospects/edit/{id}', ProspectEdit::class)->name('prospects.edit');
+    Route::get('/prospects/{id}', ProspectShow::class)->name('prospects.show');
 
     // Prospect Status CRUD
     Route::get('/prospect-statuses', ProspectStatusesIndex::class)->name('prospect-statuses.index');
