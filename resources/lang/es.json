@@ -57,5 +57,19 @@
     "Prospect status updated successfully.": "Estado de prospecto actualizado correctamente.",
     "Prospect status created successfully!": "¡Estado de prospecto creado correctamente!",
     "Search...": "Buscar...",
-    "No results found": "No se encontraron resultados"
+    "No results found": "No se encontraron resultados",
+    "ID": "Identificador",
+    "First name": "Nombre",
+    "Last name": "Primer apellido",
+    "Second last name": "Segundo apellido",
+    "LinkedIn URL": "URL de LinkedIn",
+    "Location": "Ubicación",
+    "Company": "Empresa",
+    "Status": "Estado",
+    "Industry": "Industria",
+    "Select location": "Seleccionar ubicación",
+    "Select status": "Seleccionar estado",
+    "Select industry": "Seleccionar industria",
+    "Update": "Actualizar",
+    "Edit prospect": "Editar prospecto"
 }
