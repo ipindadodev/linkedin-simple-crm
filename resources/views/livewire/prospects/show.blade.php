@@ -38,30 +38,42 @@
     <!-- Sección de Interacciones -->
     <div class="flex justify-between items-center mb-4">
         <flux:heading>{{ __('Interactions') }}</flux:heading>
-        <flux:button wire:click="$dispatch('openModal', [null, {{ $prospect->id }}])" variant="primary">
-            {{ __('Add interaction') }}
-        </flux:button>
+        <livewire:components.add-interaction :prospectId="$prospect->id" />
     </div>
 
     <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow max-h-96 overflow-y-auto">
-        @forelse ($prospect->interactions as $interaction)
-            <div class="border-b last:border-0 pb-3 mb-3">
-                <p class="text-lg font-semibold text-primary-600 dark:text-primary-400 cursor-pointer hover:underline"
+        @forelse ($prospect->interactions->sortByDesc('created_at') as $interaction) 
+            <div class="pb-3 mb-3">
+                <h3 class="text-lg font-semibold text-primary-600 dark:text-primary-400 cursor-pointer hover:underline"
                    wire:click="$dispatch('editInteraction', [{{ $interaction->id }}])">
-                    {{ $interaction->title }}
-                </p>
+                   {{ $interaction->title }}
+                </h3>
+                <span class="text-gray-500 dark:text-gray-400 text-[0.9rem]/6 mt-2">
+                    <span class="text-cyan-500">
+                        {{ __('Created at:') }} 
+                    </span>
+                    {{ $interaction->created_at->translatedFormat('l, d \d\e F \d\e Y \a \l\a\s H:i') }}
+                    @if ($interaction->updated_at->gt($interaction->created_at))
+                        -
+                        <span class="text-indigo-500">
+                            {{ __('Updated at:') }}
+                        </span>
+                         {{ $interaction->updated_at->translatedFormat('l, d \d\e F \d\e Y \a \l\a\s H:i') }}
+                    @endif
+                </span>                
                 <p class="text-gray-700 dark:text-gray-300">{{ $interaction->description }}</p>
-                <p class="text-gray-500 dark:text-gray-400 text-sm mt-2">
-                    {{ __('Created at:') }} {{ $interaction->created_at->format('d/m/Y H:i') }}<br>
-                    {{ __('Updated at:') }} {{ $interaction->updated_at->format('d/m/Y H:i') }}
-                </p>
             </div>
+    
+            @if (!$loop->last)
+                <flux:separator variant="subtle" />
+            @endif
         @empty
             <p class="text-gray-500 dark:text-gray-400">{{ __('No interactions recorded.') }}</p>
         @endforelse
     </div>
+    
 
-    <!-- Sección de Secuencias (Restaurado) -->
+    <!-- Sección de Secuencias -->
     <flux:heading class="mb-4 mt-6">{{ __('Sequences') }}</flux:heading>
     <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
         @forelse ($prospect->sequences as $sequence)
@@ -79,7 +91,4 @@
             {{ __('Edit prospect') }}
         </flux:button>
     </div>
-
-    <!-- ✅ Modal de interacciones -->
-    <livewire:components.add-interaction />
 </div>
