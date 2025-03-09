@@ -18,7 +18,7 @@
                 <tr>
                     @foreach ($columns as $columnKey => $columnLabel)
                         <th 
-                            class="p-4 cursor-pointer {{ in_array($columnKey, $sortable) ? 'hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors' : '' }} text-sm font-semibold"
+                            class="p-4 cursor-pointer text-center {{ in_array($columnKey, $sortable) ? 'hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors' : '' }} text-sm font-semibold"
                             wire:click="sort('{{ $columnKey }}')"
                         >
                             {{ $columnLabel }}
@@ -43,7 +43,7 @@
                 @forelse ($data as $row)
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition">
                         @foreach ($columns as $columnKey => $columnLabel)
-                            <td class="p-4 text-gray-700 dark:text-gray-300 text-sm">
+                            <td class="p-4 text-gray-700 dark:text-gray-300 text-sm text-center">
                                 @if ($columnKey === 'color')
                                     <span class="inline-block w-6 h-6 rounded-full border border-gray-300" style="background-color: {{ $row[$columnKey] }};"></span>
                                 @else
