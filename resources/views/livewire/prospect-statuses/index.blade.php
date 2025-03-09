@@ -13,6 +13,7 @@
 
     <livewire:components.table 
         model="App\Models\ProspectStatus"
+        editRoute="prospect-statuses.edit" 
         :columns="[
             'code' => __('Code'), 
             'name' => __('Name'), 
