@@ -1,4 +1,4 @@
-<div class="max-w-2xl mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
+<div class="w-full mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
     <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
         {{ __('Edit prospect status') }}
     </h2>
