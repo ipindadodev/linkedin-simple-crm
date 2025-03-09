@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             ProspectStatusSeeder::class,
             ProspectLocationSeeder::class,
             ProspectIndustrySeeder::class,
+            InitialSequencesSeeder::class,
         ]);
     }    
 }
