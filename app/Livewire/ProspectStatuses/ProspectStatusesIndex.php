@@ -6,7 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\ProspectStatus;
 
-class ProspectStatusesIndex extends Component // 👈 Nombre corregido
+class ProspectStatusesIndex extends Component
 {
     use WithPagination;
 
