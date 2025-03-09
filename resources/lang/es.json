@@ -72,5 +72,19 @@
     "Select industry": "Seleccionar industria",
     "Update": "Actualizar",
     "Edit prospect": "Editar prospecto",
-    "Create prospect": "Crear prospecto"
+    "Create prospect": "Crear prospecto",
+    "Prospect details": "Detalles del prospecto",
+    "Interactions": "Interacciones",
+    "No interactions recorded.": "No se han registrado interacciones.",
+    "Date:": "Fecha:",
+    "Type:": "Tipo:",
+    "Note:": "Nota:",
+    "Added on:": "Agregado el:",
+    "No sequences assigned.": "No hay secuencias asignadas.",
+    "View profile": "Ver perfil",
+    "Add interaction": "Registrar nueva interacción",
+    "New interaction": "Nueva interacción",
+    "Title": "Título",
+    "Created at:": "Creado el",
+    "Updated at:": "Actualizado el"
 }
