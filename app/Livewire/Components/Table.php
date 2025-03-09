@@ -16,14 +16,12 @@ class Table extends Component
     public array $searchable = [];
     public bool $allowEditing = false;
     public bool $allowDeleting = false;
+    public bool $allowViewing = false;
     public string $sortBy = 'id';
     public string $sortDirection = 'asc';
     public string $search = '';
-    
-    // Propiedad para la ruta de edición
     public ?string $editRoute = null;
-
-    // Nueva propiedad: Define qué relaciones cargar y qué campo mostrar
+    public ?string $viewRoute = null;
     public array $relations = [];
 
     public function mount(
@@ -33,8 +31,10 @@ class Table extends Component
         array $searchable = [],
         bool $allowEditing = false,
         bool $allowDeleting = false,
+        bool $allowViewing = false,
         ?string $editRoute = null,
-        array $relations = [] // Nueva propiedad opcional
+        ?string $viewRoute = null,
+        array $relations = []
     ) {
         $this->model = $model;
         $this->columns = $columns;
@@ -42,8 +42,10 @@ class Table extends Component
         $this->searchable = $searchable;
         $this->allowEditing = $allowEditing;
         $this->allowDeleting = $allowDeleting;
+        $this->allowViewing = $allowViewing;
         $this->editRoute = $editRoute;
-        $this->relations = $relations; // Guardamos relaciones
+        $this->viewRoute = $viewRoute;
+        $this->relations = $relations;
     }
 
     public function sort($column)
@@ -59,10 +61,9 @@ class Table extends Component
     #[\Livewire\Attributes\Computed]
     public function data()
     {
-        /** @var Model $model */
         $model = app($this->model);
         $query = $model::query();
-    
+
         if (!empty($this->search) && !empty($this->searchable)) {
             $query->where(function ($q) {
                 foreach ($this->searchable as $column) {
@@ -70,17 +71,16 @@ class Table extends Component
                 }
             });
         }
-    
-        // Cargar solo relaciones válidas, ignorando columnas tipo *_id
+
         $relationsToLoad = collect($this->relations)
             ->pluck('relation')
             ->filter()
             ->toArray();
-    
+
         if (!empty($relationsToLoad)) {
             $query->with($relationsToLoad);
         }
-    
+
         return $query->orderBy($this->sortBy, $this->sortDirection)->paginate(6);
     }
 
@@ -102,7 +102,8 @@ class Table extends Component
         return view('livewire.components.table', [
             'data' => $this->data(),
             'editRoute' => $this->editRoute,
-            'relations' => $this->relations, // Pasamos relaciones a la vista
+            'viewRoute' => $this->viewRoute,
+            'relations' => $this->relations,
         ]);
     }
 }

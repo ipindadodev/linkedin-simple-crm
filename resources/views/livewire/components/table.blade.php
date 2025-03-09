@@ -34,7 +34,7 @@
                         </th>
                     @endforeach
 
-                    @if ($allowEditing || $allowDeleting)
+                    @if ($allowEditing || $allowDeleting || $allowViewing)
                         <th class="p-4 text-sm font-semibold">{{ __('Actions') }}</th>
                     @endif
                 </tr>
@@ -45,7 +45,6 @@
                         @foreach ($columns as $columnKey => $columnLabel)
                             <td class="p-4 text-gray-700 dark:text-gray-300 text-sm text-center">
                                 @if (isset($relations[$columnKey])) 
-                                    <!-- Si la columna es una relación, mostramos el campo especificado -->
                                     {{ $row->{$relations[$columnKey]['relation']}->{$relations[$columnKey]['field']} ?? '-' }}
                                 @elseif ($columnKey === 'color')
                                     <span class="inline-block w-6 h-6 rounded-full border border-gray-300" style="background-color: {{ $row[$columnKey] }};"></span>
@@ -55,14 +54,18 @@
                             </td>
                         @endforeach
 
-                        @if ($allowEditing || $allowDeleting)
+                        @if ($allowEditing || $allowDeleting || $allowViewing)
                             <td class="p-4 flex gap-2 justify-center">
+                                @if ($allowViewing)
+                                    <flux:button as="a" href="{{ route($viewRoute, [$row['id']]) }}" size="sm">
+                                        {{ __('View') }}
+                                    </flux:button>
+                                @endif
                                 @if ($allowEditing)
                                     <flux:button as="a" href="{{ route($editRoute, [$row['id']]) }}" size="sm">
                                         {{ __('Edit') }}
                                     </flux:button>
                                 @endif
-
                                 @if ($allowDeleting)
                                     <button 
                                         type="button"
@@ -84,11 +87,5 @@
                 @endforelse
             </tbody>
         </table>
-
-        <div class="bg-gray-100 dark:bg-gray-800 px-4 py-3 flex justify-between items-center rounded-b-xl">
-            <div>
-                {{ $data->links() }}
-            </div>
-        </div>
     </div>
 </div>
