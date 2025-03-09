@@ -44,7 +44,10 @@
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition">
                         @foreach ($columns as $columnKey => $columnLabel)
                             <td class="p-4 text-gray-700 dark:text-gray-300 text-sm text-center">
-                                @if ($columnKey === 'color')
+                                @if (isset($relations[$columnKey])) 
+                                    <!-- Si la columna es una relación, mostramos el campo especificado -->
+                                    {{ $row->{$relations[$columnKey]['relation']}->{$relations[$columnKey]['field']} ?? '-' }}
+                                @elseif ($columnKey === 'color')
                                     <span class="inline-block w-6 h-6 rounded-full border border-gray-300" style="background-color: {{ $row[$columnKey] }};"></span>
                                 @else
                                     {{ $row[$columnKey] }}
@@ -53,9 +56,9 @@
                         @endforeach
 
                         @if ($allowEditing || $allowDeleting)
-                            <td class="p-4 flex gap-2">
+                            <td class="p-4 flex gap-2 justify-center">
                                 @if ($allowEditing)
-                                    <flux:button as="a" href="{{ route('prospect-statuses.edit', $row['id']) }}" size="sm">
+                                    <flux:button as="a" href="{{ route($editRoute, [$row['id']]) }}" size="sm">
                                         {{ __('Edit') }}
                                     </flux:button>
                                 @endif
