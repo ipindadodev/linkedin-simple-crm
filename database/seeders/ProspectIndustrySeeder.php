@@ -167,7 +167,7 @@ class ProspectIndustrySeeder extends Seeder
             [ '150' , 'Horticultura' ],
             [ '151' , 'Hospitalidad' ],
             [ '152' , 'hospitales' ],
-            [ '153' , 'Hospitales y sSanidad' ],
+            [ '153' , 'Hospitales y Sanidad' ],
             [ '154' , 'Hoteles y moteles' ],
             [ '155' , 'Fabricación de mobiliario doméstico e institucional' ],
             [ '156' , 'Fabricación de electrodomésticos' ],
