@@ -7,7 +7,6 @@ use Livewire\Volt\Volt;
 // Importación correcta de componentes Livewire
 use App\Livewire\ProspectStatuses\ProspectStatusesIndex;
 use App\Livewire\Prospects\ProspectsIndex;
-use App\Livewire\Sequences\SequencesIndex;
 use App\Livewire\SequencePoints\SequencePointsIndex;
 
 use App\Livewire\Prospects\Create as ProspectCreate;
@@ -17,8 +16,10 @@ use App\Livewire\Prospects\Show as ProspectShow;
 use App\Livewire\ProspectStatuses\Create as ProspectStatusCreate;
 use App\Livewire\ProspectStatuses\Edit as ProspectStatusEdit;
 
+use App\Livewire\Sequences\Show as SequenceShow;
 use App\Livewire\Sequences\Create as SequenceCreate;
 use App\Livewire\Sequences\Edit as SequenceEdit;
+use App\Livewire\Sequences\Index as SequencesIndex;
 
 use App\Livewire\SequencePoints\Create as SequencePointCreate;
 use App\Livewire\SequencePoints\Edit as SequencePointEdit;
@@ -60,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sequences', SequencesIndex::class)->name('sequences.index');
     Route::get('/sequences/create', SequenceCreate::class)->name('sequences.create');
     Route::get('/sequences/edit/{id}', SequenceEdit::class)->name('sequences.edit');
+    Route::get('/sequences/{sequence}', SequenceShow::class)->name('sequences.show');
 
     // Sequence Points CRUD
     Route::get('/sequence-points', SequencePointsIndex::class)->name('sequence-points.index');
