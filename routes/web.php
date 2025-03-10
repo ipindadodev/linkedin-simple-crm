@@ -62,7 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sequences', SequencesIndex::class)->name('sequences.index');
     Route::get('/sequences/create', SequenceCreate::class)->name('sequences.create');
     Route::get('/sequences/edit/{id}', SequenceEdit::class)->name('sequences.edit');
-    Route::get('/sequences/{id}', SequenceShow::class)->
+    Route::get('/sequences/{id}', SequenceShow::class)->name('sequences.show');
 
     // Sequence Points CRUD
     Route::get('/sequence-points', SequencePointsIndex::class)->name('sequence-points.index');
