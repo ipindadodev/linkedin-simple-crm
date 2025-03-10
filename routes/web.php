@@ -62,13 +62,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sequences', SequencesIndex::class)->name('sequences.index');
     Route::get('/sequences/create', SequenceCreate::class)->name('sequences.create');
     Route::get('/sequences/edit/{id}', SequenceEdit::class)->name('sequences.edit');
-    Route::get('/sequences/{sequence}', SequenceShow::class)->name('sequences.show');
+    Route::get('/sequences/{id}', SequenceShow::class)->
 
     // Sequence Points CRUD
     Route::get('/sequence-points', SequencePointsIndex::class)->name('sequence-points.index');
     Route::get('/sequence-points/create', SequencePointCreate::class)->name('sequence-points.create');
     Route::get('/sequence-points/edit/{id}', SequencePointEdit::class)->name('sequence-points.edit');
-    Route::get('/sequence-points/{sequence}', SequencePointShow::class)->name('sequence-points.show');
+    Route::get('/sequence-points/{id}', SequencePointShow::class)->name('sequence-points.show');
 });
 
 // Autenticación
