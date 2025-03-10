@@ -23,6 +23,7 @@ use App\Livewire\Sequences\Index as SequencesIndex;
 
 use App\Livewire\SequencePoints\Create as SequencePointCreate;
 use App\Livewire\SequencePoints\Edit as SequencePointEdit;
+use App\Livewire\SequencePoints\Show as SequencePointShow;
 
 // Página de bienvenida
 Route::get('/', function () {
@@ -67,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sequence-points', SequencePointsIndex::class)->name('sequence-points.index');
     Route::get('/sequence-points/create', SequencePointCreate::class)->name('sequence-points.create');
     Route::get('/sequence-points/edit/{id}', SequencePointEdit::class)->name('sequence-points.edit');
+    Route::get('/sequence-points/{sequence}', SequencePointShow::class)->name('sequence-points.show');
 });
 
 // Autenticación
