@@ -10,25 +10,32 @@ class Show extends Component
 {
     public Sequence $sequence;
     public array $sequencePoints = [];
+    public string $startDate;
 
     public function mount($id)
     {
         $this->sequence = Sequence::findOrFail($id)->load('sequence_points');
+        $this->startDate = Carbon::now()->translatedFormat('l, j F Y'); // Fecha de inicio en formato legible
         $this->prepareSequencePoints();
     }
     
-
     private function prepareSequencePoints()
     {
-        $startDate = Carbon::now();
+        $startDate = Carbon::now(); // Suponiendo que la secuencia inicia hoy
 
         $this->sequencePoints = $this->sequence->sequence_points->map(function ($point) use ($startDate) {
+            $originalSendDate = $this->calculateSendDate($point, $startDate);
+            $postponedDate = $this->adjustToNextBusinessDay($originalSendDate);
+            $wasPostponed = $originalSendDate->ne($postponedDate);
+
             return [
                 'order' => $point->order,
                 'message' => $point->message,
                 'time_type' => $this->translateTimeType($point->time_type),
                 'when' => $this->calculateWhen($point),
-                'send_date' => $this->calculateSendDate($point, $startDate),
+                'send_date' => $postponedDate->translatedFormat('l, j F Y'),
+                'original_date' => $wasPostponed ? $originalSendDate->translatedFormat('l, j F Y') : null,
+                'postponed' => $wasPostponed,
             ];
         })->toArray();
     }
@@ -57,9 +64,9 @@ class Show extends Component
         };
     }
 
-    private function calculateSendDate($point, Carbon $startDate): string
+    private function calculateSendDate($point, Carbon $startDate): Carbon
     {
-        $sendDate = match ($point->time_type) {
+        return match ($point->time_type) {
             'daily' => $startDate->copy()->addDay(),
             'weekly' => $startDate->copy()->next($point->day_of_week ?? 'monday'),
             'monthly' => $startDate->copy()->day($point->day_of_month ?? 1),
@@ -69,8 +76,14 @@ class Show extends Component
                 : ($point->days_after_previous ? $startDate->copy()->addDays($point->days_after_previous) : $startDate),
             default => $startDate,
         };
+    }
 
-        return $sendDate->translatedFormat('l, j F Y');
+    private function adjustToNextBusinessDay(Carbon $date): Carbon
+    {
+        while ($date->isWeekend()) {
+            $date->addDay(); // Mueve la fecha al siguiente día hábil
+        }
+        return $date;
     }
 
     public function render()
@@ -78,7 +91,7 @@ class Show extends Component
         return view('livewire.sequences.show', [
             'sequence' => $this->sequence,
             'sequencePoints' => $this->sequencePoints,
-            'startDate' => Carbon::now()->translatedFormat('l, j F Y'),
+            'startDate' => $this->startDate,
         ]);
     }
 }

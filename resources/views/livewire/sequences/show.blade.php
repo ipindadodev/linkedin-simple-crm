@@ -33,9 +33,15 @@
                     <strong>{{ __('Message:') }}</strong> {{ $point['message'] }} <br>
                     <strong>{{ __('Type:') }}</strong> {{ $point['time_type'] }} <br>
                     <strong>{{ __('When:') }}</strong> {{ $point['when'] }} <br>
+                    
                     <strong>{{ __('Send Date:') }}</strong> 
                     {{ __('If the sequence starts on') }} {{ $startDate }}, 
-                    {{ __('this message will be sent on') }} <strong>{{ $point['send_date'] }}</strong>.
+                    {{ __('this message will be sent on') }} 
+                    <strong class="text-gray-900 dark:text-gray-100">{{ $point['send_date'] }}</strong>
+
+                    @if ($point['postponed'])
+                        ({{ __('postponed from') }} {{ $point['original_date'] }})
+                    @endif
                 </p>                
             </div>
     
