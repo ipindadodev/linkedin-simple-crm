@@ -122,5 +122,7 @@
     "Day of month": "Día del mes",
     "Day of week": "Día de la semana",
     "Days after start": "Días después del comienzo",
-    "Days after previous": "Días después del anterior"
+    "Days after previous": "Días después del anterior",
+    "Whoops! Something went wrong.": "¡Ups! Algo salió mal.",
+    "The sequence id field is required.": "El campo de identificador de secuencia es obligatorio."
 }
