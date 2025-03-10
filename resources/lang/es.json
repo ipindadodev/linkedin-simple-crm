@@ -127,5 +127,13 @@
     "The sequence id field is required.": "El campo de identificador de secuencia es obligatorio.",
     "Sequence point updated successfully!": "¡Punto de secuencia actualizado correctamente!",
     "Sequence point details": "Detalles del punto de secuencia",
-    "Sequence ID": "Identificador de la secuencia"
+    "Sequence ID": "Identificador de la secuencia",
+    "Sequence details": "Detalles de la secuencia",
+    "When:": "Cuándo:",
+    "If the sequence started on": "Si la secuencia comenzó el",
+    "this message would be sent on": "este mensaje se enviaría el",
+    "When": "Cuándo",
+    "Edit sequence point": "Editar punto de secuencia",
+    "If the sequence starts on": "Si la secuencia comienza el",
+    "this message will be sent on": "este mensaje se enviará el"
 }
