@@ -125,5 +125,7 @@
     "Days after previous": "Días después del anterior",
     "Whoops! Something went wrong.": "¡Ups! Algo salió mal.",
     "The sequence id field is required.": "El campo de identificador de secuencia es obligatorio.",
-    "Sequence point updated successfully!": "¡Punto de secuencia actualizado correctamente!"
+    "Sequence point updated successfully!": "¡Punto de secuencia actualizado correctamente!",
+    "Sequence point details": "Detalles del punto de secuencia",
+    "Sequence ID": "Identificador de la secuencia"
 }
