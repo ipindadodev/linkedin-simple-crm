@@ -17,6 +17,9 @@ class Prospect extends Model
         'location_id',
         'status_id',
         'industry_id',
+        'email',
+        'phone',
+        'company',
     ];
 
     // Relationship with ProspectStatus (One to One)
