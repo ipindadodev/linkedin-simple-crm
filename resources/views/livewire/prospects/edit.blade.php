@@ -14,6 +14,15 @@
             <flux:input wire:model.defer="linkedin_url" label="{{ __('LinkedIn URL') }}" type="url" />
         </div>
 
+        <div class="grid grid-cols-2 gap-6 mb-6">
+            <flux:input wire:model.defer="email" label="{{ __('Email') }}" />
+            <flux:input wire:model.defer="phone" label="{{ __('Phone') }}" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 mb-6">
+            <flux:input wire:model.defer="company" label="{{ __('Company') }}" />
+        </div>
+
         <!-- Ubicación, Estado e Industria (con búsqueda) -->
         <div class="grid grid-cols-3 gap-6 mb-6">
             <livewire:components.select-search 
