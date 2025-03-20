@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('second_last_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('company')->nullable();
             $table->text('linkedin_url');
         
             // Foreign keys
