@@ -135,5 +135,8 @@
     "When": "Cuándo",
     "Edit sequence point": "Editar punto de secuencia",
     "If the sequence starts on": "Si la secuencia comienza el",
-    "this message will be sent on": "este mensaje se enviará el"
+    "this message will be sent on": "este mensaje se enviará el",
+    "Email": "Correo electrónico",
+    "Phone": "Teléfono",
+    "LinkedIn": "LinkedIn"
 }
