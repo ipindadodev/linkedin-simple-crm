@@ -22,6 +22,14 @@
             </a>
         </div>
         <div>
+            <p class="text-gray-600 dark:text-gray-300 font-semibold">{{ __('Email') }}</p>
+            <span class="text-gray-900 dark:text-gray-100">{{ $prospect->email }}</span>
+        </div>
+        <div>
+            <p class="text-gray-600 dark:text-gray-300 font-semibold">{{ __('Phone') }}</p>
+            <span class="text-gray-900 dark:text-gray-100">{{ $prospect->phone }}</span>
+        </div>
+        <div>
             <p class="text-gray-600 dark:text-gray-300 font-semibold">{{ __('Location') }}</p>
             <span class="text-gray-900 dark:text-gray-100">{{ $prospect->location->name ?? '-' }}</span>
         </div>
