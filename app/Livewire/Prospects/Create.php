@@ -11,7 +11,7 @@ use App\Models\ProspectIndustry;
 class Create extends Component
 {
     public $first_name, $last_name, $second_last_name, $linkedin_url;
-    public $location_id, $status_id, $industry_id;
+    public $location_id, $status_id, $industry_id, $email, $phone, $company;
 
     protected $listeners = ['updateModel'];
 
@@ -33,6 +33,9 @@ class Create extends Component
             'location_id' => 'required|exists:prospect_locations,id',
             'status_id' => 'required|exists:prospect_statuses,id',
             'industry_id' => 'required|exists:prospect_industries,id',
+            'email' => 'nullable|email|max:255',
+            'phone' => 'nullable|string|max:255',
+            'company' => 'nullable|string|max:255',
         ];
     }
 
@@ -48,6 +51,9 @@ class Create extends Component
             'location_id' => $this->location_id,
             'status_id' => $this->status_id,
             'industry_id' => $this->industry_id,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'company' => $this->company,
         ]);
 
         session()->flash('message', 'Prospect created successfully.');
