@@ -81,7 +81,7 @@
     </div>
     
 
-    <!-- Sección de Secuencias -->
+    <!-- Sección de secuencias -->
     <flux:heading class="mb-4 mt-6">{{ __('Sequences') }}</flux:heading>
 
     <livewire:components.assign-sequence-to-prospect :prospect="$prospect" />
@@ -116,34 +116,45 @@
     
                 <div class="ml-4 mt-4 space-y-2">
                     @forelse ($sequence->pivot->calculated_dates as $index => $step)
-                        <div class="p-3 bg-white dark:bg-gray-900 border rounded-lg shadow-sm">
-                            <div class="flex justify-between items-center">
-                                <p class="text-sm text-gray-700 dark:text-gray-300">
-                                    <strong>{{ __('Date:') }}</strong> {{ \Carbon\Carbon::parse($step['send_date'])->translatedFormat('l, d F Y') }}
-                                </p>
-    
-                                @if (empty($step['done']))
-                                <livewire:components.mark-step-as-done 
+                    @php $done = !empty($step['done']); @endphp
+                
+                    <div class="p-3 bg-white dark:bg-gray-900 border rounded-lg shadow-sm">
+                        <div class="flex justify-between items-center gap-2">
+                            <p class="text-sm text-gray-700 dark:text-gray-300">
+                                <strong>{{ __('Date:') }}</strong> {{ \Carbon\Carbon::parse($step['send_date'])->translatedFormat('l, d F Y') }}
+                            </p>
+                
+                            <div class="flex items-center gap-4">
+                                @if ($done)
+                                    <span class="text-sm text-green-600">
+                                        {{ __('Done') }}
+                                        @if (!empty($step['done_at']))
+                                            – {{ \Carbon\Carbon::parse($step['done_at'])->translatedFormat('d/m/Y H:i') }}
+                                        @endif
+                                    </span>
+                                @endif
+                
+                                <livewire:components.toggle-step-status
                                     :prospectId="$prospect->id"
                                     :sequenceId="$sequence->id"
                                     :stepIndex="$index"
-                                    wire:key="step-{{ $prospect->id }}-{{ $sequence->id }}-{{ $index }}"
+                                    :done="$done"
+                                    wire:key="toggle-step-{{ $prospect->id }}-{{ $sequence->id }}-{{ $index }}"
                                 />
-                                @else
-                                    <span class="text-sm text-green-600">{{ __('Done') }}</span>
-                                @endif
                             </div>
-    
-                            <p class="text-sm text-gray-700 dark:text-gray-300">
-                                <strong>{{ __('Goal:') }}</strong> {{ $step['goal'] ?? '-' }}
-                            </p>
-                            <p class="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line mt-1">
-                                {{ $step['message'] }}
-                            </p>
                         </div>
-                    @empty
-                        <p class="text-gray-500 dark:text-gray-400 italic">{{ __('No steps found.') }}</p>
-                    @endforelse
+                
+                        <p class="text-sm text-gray-700 dark:text-gray-300">
+                            <strong>{{ __('Goal:') }}</strong> {{ $step['goal'] ?? '-' }}
+                        </p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line mt-1">
+                            {{ $step['message'] }}
+                        </p>
+                    </div>
+                @empty
+                    <p class="text-gray-500 dark:text-gray-400 italic">{{ __('No steps found.') }}</p>
+                @endforelse
+                
                 </div>
             </details>
         @empty
@@ -158,9 +169,7 @@
         });
     </script>
     @endpush
-    
 
-    
     <div class="flex justify-end mt-6">
         <flux:button as="a" href="{{ route('prospects.edit', $prospect->id) }}" variant="primary">
             {{ __('Edit prospect') }}
