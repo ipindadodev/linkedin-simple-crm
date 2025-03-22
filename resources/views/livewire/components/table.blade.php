@@ -88,4 +88,9 @@
             </tbody>
         </table>
     </div>
+    @if ($data->hasPages())
+        <div class="mt-6">
+            {{ $data->links('pagination::tailwind') }}
+        </div>
+    @endif
 </div>
