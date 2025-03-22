@@ -81,7 +81,7 @@ class Table extends Component
             $query->with($relationsToLoad);
         }
 
-        return $query->orderBy($this->sortBy, $this->sortDirection)->paginate(6);
+        return $query->orderBy($this->sortBy, $this->sortDirection)->paginate(7);
     }
 
     public function triggerDelete($model, $id)
