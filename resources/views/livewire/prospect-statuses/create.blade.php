@@ -11,7 +11,7 @@
         <div class="mb-4"></div>
 
         <!-- Descripción -->
-        <flux:textarea wire:model.defer="description" label="{{ __('Description') }}" class="mt-4" />
+        <flux:textarea wire:model.defer="description" label="{{ __('Description') }}" class="mt-4" required/>
 
         <!-- Selección de Color -->
         <div class="flex items-center gap-3 mt-4">
