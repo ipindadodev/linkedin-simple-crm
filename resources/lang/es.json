@@ -143,5 +143,7 @@
     "Create a new location": "Crear una nueva ubicación",
     "Prospect status not found.": "Estado no encontrado.",
     "Prospect location deleted successfully.": "Ubicación eliminada correctamente.",
-    "Prospect location not found.": "Ubicación no encontrada."
+    "Prospect location not found.": "Ubicación no encontrada.",
+    "to": "a",
+    "results": "resultados"
 }
