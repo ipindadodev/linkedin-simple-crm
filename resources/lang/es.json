@@ -155,5 +155,17 @@
     "Create an account": "Crear una cuenta",
     "Enter your details below to create your account": "Ingresa tus datos a continuación para crear tu cuenta",
     "Full name": "Nombre completo",
-    "email@example.com": "tu@nomail.com"
+    "email@example.com": "tu@nomail.com",
+    "Assign sequence": "Asignar secuencia",
+    "Choose...": "Seleccionar...",
+    "Assign": "Asignar",
+    "Sequence assigned successfully!": "¡Secuencia asignada correctamente!",
+    "Sequence unassigned successfully!": "¡Secuencia desasignada correctamente!",
+    "Sequence assigned": "Secuencia asignada",
+    "Assigned:": "Asignada:",
+    "Starts:": "Comienza:",
+    "No steps found.": "No se encontraron pasos de la secuencia.",
+    "Goal:": "Objetivo:",
+    "All steps completed.": "Todos los pasos completados.",
+    "Next step:": "Siguiente paso:"
 }
