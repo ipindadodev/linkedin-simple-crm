@@ -21,18 +21,32 @@ class Show extends Component
     
     private function prepareSequencePoints()
     {
-        $currentDate = Carbon::now(); // Suponiendo que la secuencia inicia hoy
-        $this->startDate = $currentDate->translatedFormat('l, j F Y');
+        $startDate = Carbon::now(); // Fecha fija de inicio
+        $this->startDate = $startDate->translatedFormat('l, j F Y');
     
-        $points = $this->sequence->sequence_points->sortBy('order'); // asegúrate de que van en orden
+        $previousDate = $startDate->copy();
+    
+        $points = $this->sequence->sequence_points->sortBy('order');
     
         $this->sequencePoints = [];
     
         foreach ($points as $point) {
-            $originalSendDate = $this->calculateSendDate($point, $currentDate);
+            // Decide la fecha base
+            $baseDate = match (true) {
+                $point->days_after_start !== null => $startDate,
+                $point->days_after_previous !== null => $previousDate,
+                default => $startDate,
+            };
+    
+            // Calcula la fecha objetivo
+            $originalSendDate = $this->calculateSendDate($point, $baseDate);
             $postponedDate = $this->adjustToNextBusinessDay($originalSendDate);
             $wasPostponed = $originalSendDate->ne($postponedDate);
     
+            // Actualiza previousDate siempre con la fecha final (no base)
+            $previousDate = $originalSendDate->copy();
+    
+            // Guarda el punto en el array final
             $this->sequencePoints[] = [
                 'order' => $point->order,
                 'message' => $point->message,
@@ -42,15 +56,9 @@ class Show extends Component
                 'original_date' => $wasPostponed ? $originalSendDate->translatedFormat('l, j F Y') : null,
                 'postponed' => $wasPostponed,
             ];
-    
-            // 👉 Avanzamos la fecha base SOLO si se indica "después del anterior"
-            if ($point->time_type === 'dynamic' && $point->days_after_previous) {
-                $currentDate = $originalSendDate->copy();
-            }
         }
     }
     
-
     private function translateTimeType(string $type): string
     {
         return match ($type) {
