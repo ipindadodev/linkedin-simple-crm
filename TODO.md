@@ -33,8 +33,8 @@ TODO
     - [X] Interacciones
 - [ ] Campos dinámicos en los puntos de las secuencias
 - [ ] Notificaciones automáticas
-- [ ] Localización de los prospectos
-    - [ ] CRUD
+- [X] Localización de los prospectos
+    - [X] CRUD
 
 ## Ideas para implementar si es posible
 Marcar puntos de secuencia directamente como realizados.
