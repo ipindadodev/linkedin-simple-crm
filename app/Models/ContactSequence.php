@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ContactSequence extends Model
+class ContactSequence extends Pivot
 {
     protected $table = 'contact_sequence'; // Nombre personalizado de la tabla
 
