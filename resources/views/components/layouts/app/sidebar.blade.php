@@ -25,6 +25,10 @@
                     <flux:navlist.item icon="link" :href="route('sequences.index')" :current="request()->routeIs('sequences.*')" wire:navigate>{{ __('Sequences') }}</flux:navlist.item>
                     <flux:navlist.item icon="bell" :href="route('sequence-points.index')" :current="request()->routeIs('sequence-points.*')" wire:navigate>{{ __('Sequence points') }}</flux:navlist.item>
                 </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Locations')" class="grid">
+                    <flux:navlist.item icon="map" :href="route('locations.index')" :current="request()->routeIs('locations.*')" wire:navigate>{{ __('Locations') }}</flux:navlist.item>
+                </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
