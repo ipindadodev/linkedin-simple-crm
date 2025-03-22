@@ -145,5 +145,9 @@
     "Prospect location deleted successfully.": "Ubicación eliminada correctamente.",
     "Prospect location not found.": "Ubicación no encontrada.",
     "to": "a",
-    "results": "resultados"
+    "results": "resultados",
+    "Create location": "Crear ubicación",
+    "Edit location": "Editar ubicación",
+    "Create account": "Crear cuenta",
+    "Send date:": "Fecha de envío:"
 }
