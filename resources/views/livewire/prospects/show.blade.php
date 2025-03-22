@@ -95,12 +95,45 @@
                      {{ __('Starts:') }} {{ $sequence->pivot->start_at->format('d/m/Y') }})
                 </summary>
     
-                <div class="ml-4 mt-2 space-y-2">
-                    @forelse ($sequence->pivot->calculated_dates as $step)
+                @php
+                    $nextStep = collect($sequence->pivot->calculated_dates ?? [])
+                        ->first(fn ($step) => empty($step['done']));
+                @endphp
+    
+                @if ($nextStep)
+                    <div class="ml-4 mt-2 text-sm text-gray-700 dark:text-gray-300">
+                        <p>
+                            <strong>{{ __('Next step:') }}</strong> 
+                            {{ \Carbon\Carbon::parse($nextStep['send_date'])->translatedFormat('l, d F Y') }} – 
+                            {{ $nextStep['goal'] ?? __('No goal') }}
+                        </p>
+                    </div>
+                @else
+                    <div class="ml-4 mt-2 text-sm text-gray-500 dark:text-gray-400 italic">
+                        {{ __('All steps completed.') }}
+                    </div>
+                @endif
+    
+                <div class="ml-4 mt-4 space-y-2">
+                    @forelse ($sequence->pivot->calculated_dates as $index => $step)
                         <div class="p-3 bg-white dark:bg-gray-900 border rounded-lg shadow-sm">
-                            <p class="text-sm text-gray-700 dark:text-gray-300">
-                                <strong>{{ __('Date:') }}</strong> {{ \Carbon\Carbon::parse($step['send_date'])->translatedFormat('l, d F Y') }}
-                            </p>
+                            <div class="flex justify-between items-center">
+                                <p class="text-sm text-gray-700 dark:text-gray-300">
+                                    <strong>{{ __('Date:') }}</strong> {{ \Carbon\Carbon::parse($step['send_date'])->translatedFormat('l, d F Y') }}
+                                </p>
+    
+                                @if (empty($step['done']))
+                                <livewire:components.mark-step-as-done 
+                                    :prospectId="$prospect->id"
+                                    :sequenceId="$sequence->id"
+                                    :stepIndex="$index"
+                                    wire:key="step-{{ $prospect->id }}-{{ $sequence->id }}-{{ $index }}"
+                                />
+                                @else
+                                    <span class="text-sm text-green-600">{{ __('Done') }}</span>
+                                @endif
+                            </div>
+    
                             <p class="text-sm text-gray-700 dark:text-gray-300">
                                 <strong>{{ __('Goal:') }}</strong> {{ $step['goal'] ?? '-' }}
                             </p>
@@ -117,6 +150,15 @@
             <p class="text-gray-500 dark:text-gray-400">{{ __('No sequences assigned.') }}</p>
         @endforelse
     </div>
+    
+    @push('scripts')
+    <script>
+        Livewire.on('stepMarked', () => {
+            Livewire.dispatch('refreshProspect'); // trigger refresh in parent
+        });
+    </script>
+    @endpush
+    
 
     
     <div class="flex justify-end mt-6">
