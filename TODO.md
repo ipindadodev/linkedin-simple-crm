@@ -21,17 +21,20 @@ TODO
 - [X] Crear modelos
 - [X] Crear las tablas pivote
 - [X] Seeders
-- [ ] CRUD con Livewire
+- [X] CRUD con Livewire
     - [X] Estados del prospecto
     - [X] Prospectos
     - [X] Secuencias
-    - [ ] Puntos de secuencia
+    - [X] Puntos de secuencia
         - [X] Crear
-        - [ ] Editar
+        - [X] Editar
         - [X] Eliminar
-        - [ ] Ver
+        - [X] Ver
     - [X] Interacciones
+- [ ] Campos dinámicos en los puntos de las secuencias
 - [ ] Notificaciones automáticas
+- [ ] Localización de los prospectos
+    - [ ] CRUD
 
 ## Ideas para implementar si es posible
 Marcar puntos de secuencia directamente como realizados.
