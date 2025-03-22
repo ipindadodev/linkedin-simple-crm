@@ -31,10 +31,10 @@ TODO
         - [X] Eliminar
         - [X] Ver
     - [X] Interacciones
-- [ ] Campos dinámicos en los puntos de las secuencias
-- [ ] Notificaciones automáticas
+- [X] Campos dinámicos en los puntos de las secuencias
 - [X] Localización de los prospectos
     - [X] CRUD
+- [ ] Notificaciones automáticas en el desk
 
 ## Ideas para implementar si es posible
 Marcar puntos de secuencia directamente como realizados.
