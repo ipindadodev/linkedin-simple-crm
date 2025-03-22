@@ -47,20 +47,24 @@
             </div>
         </div>
 
-        {{-- <textarea wire:model.live="message" class="w-full p-2 border rounded-md"></textarea> --}}
-
         <flux:textarea wire:model.defer="message" label="{{ __('Message') }}" required />
 
         <div class="grid grid-cols-3 gap-6 mb-6 mt-6">
-            <flux:select wire:model="time_type" placeholder="{{ __('Select time type') }}" label="{{ __('Time type') }}" required>
+            <flux:select wire:model.live="time_type" placeholder="{{ __('Select time type') }}" label="{{ __('Time type') }}" required>
                 <flux:select.option value="daily">{{ __('Daily') }}</flux:select.option>
                 <flux:select.option value="weekly">{{ __('Weekly') }}</flux:select.option>
                 <flux:select.option value="monthly">{{ __('Monthly') }}</flux:select.option>
                 <flux:select.option value="quarterly">{{ __('Quarterly') }}</flux:select.option>
+                <flux:select.option value="yearly">{{ __('Yearly') }}</flux:select.option>
                 <flux:select.option value="dynamic">{{ __('Dynamic') }}</flux:select.option>
             </flux:select>
 
-            <flux:select wire:model="day_of_week" placeholder="{{ __('Select day of week') }}" label="{{ __('Day of week') }}" :disabled="$time_type === 'daily' || $time_type === 'dynamic'">
+            <flux:select 
+                wire:model="day_of_week"
+                label="{{ __('Day of week') }}"
+                placeholder="{{ __('Select day of week') }}"
+                :disabled="!in_array($time_type, ['weekly', 'monthly', 'quarterly', 'yearly'])"
+            >
                 <flux:select.option value="monday">{{ __('Monday') }}</flux:select.option>
                 <flux:select.option value="tuesday">{{ __('Tuesday') }}</flux:select.option>
                 <flux:select.option value="wednesday">{{ __('Wednesday') }}</flux:select.option>
@@ -69,14 +73,35 @@
                 <flux:select.option value="saturday">{{ __('Saturday') }}</flux:select.option>
                 <flux:select.option value="sunday">{{ __('Sunday') }}</flux:select.option>
             </flux:select>
+        
 
-            <flux:input wire:model.defer="day_of_month" label="{{ __('Day of month') }}" type="number" min="1" max="31" :disabled="$time_type === 'daily' || $time_type === 'dynamic'" />
-        </div>
+            <flux:input 
+                wire:model.defer="day_of_month" 
+                label="{{ __('Day of month') }}" 
+                type="number" 
+                min="1" 
+                max="31" 
+                :disabled="!in_array($time_type, ['monthly', 'quarterly', 'yearly'])" 
+            />
+            </div>
 
         <div class="grid grid-cols-2 gap-6 mb-6">
-            <flux:input wire:model.defer="days_after_start" label="{{ __('Days after start') }}" type="number" min="0" :disabled="!($time_type === 'dynamic')" />
-            <flux:input wire:model.defer="days_after_previous" label="{{ __('Days after previous') }}" type="number" min="0" :disabled="!($time_type === 'dynamic')" />
-        </div>
+            <flux:input 
+                wire:model.defer="days_after_start" 
+                label="{{ __('Days after start') }}" 
+                type="number" 
+                min="0" 
+                :disabled="$time_type !== 'dynamic'" 
+            />
+
+            <flux:input 
+                wire:model.defer="days_after_previous" 
+                label="{{ __('Days after previous') }}" 
+                type="number" 
+                min="0" 
+                :disabled="$time_type !== 'dynamic'" 
+            />
+      </div>
 
         <flux:input wire:model.defer="goal" label="{{ __('Goal') }}" />
 

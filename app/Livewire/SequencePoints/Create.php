@@ -83,7 +83,7 @@ class Create extends Component
     {
         match ($this->time_type) {
             'daily' => $this->reset(['day_of_week', 'day_of_month', 'days_after_start', 'days_after_previous']),
-            'weekly', 'monthly', 'quarterly' => $this->reset(['days_after_start', 'days_after_previous']),
+            'weekly', 'monthly', 'quarterly', 'yearly' => $this->reset(['days_after_start', 'days_after_previous']),
             'dynamic' => $this->reset(['day_of_week', 'day_of_month']),
         };
     }
