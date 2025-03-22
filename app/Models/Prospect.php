@@ -55,7 +55,15 @@ class Prospect extends Model
     public function sequences()
     {
         return $this->belongsToMany(Sequence::class, 'contact_sequence')
-                    ->withPivot('included_at')
+                    ->withPivot(['included_at', 'start_at', 'calculated_dates'])
                     ->withTimestamps();
-    }    
+    }
+
+    // Relationship with ContactSequences (One to Many)
+    // Relación con ContactSequences (Uno a Muchos)
+    // Pivot table: contact_sequence
+    public function contactSequences()
+    {
+        return $this->hasMany(ContactSequence::class);
+    }
 }
