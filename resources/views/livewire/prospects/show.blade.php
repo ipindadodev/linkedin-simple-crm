@@ -88,14 +88,37 @@
     
     <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
         @forelse ($prospect->sequences as $sequence)
-            <p class="text-gray-700 dark:text-gray-300">
-                <strong>{{ __('Name:') }}</strong> {{ $sequence->name }} 
-                ({{ __('Added on:') }} {{ $sequence->pivot->included_at->format('d/m/Y') }})
-            </p>
+            <details class="mb-4">
+                <summary class="cursor-pointer text-gray-800 dark:text-gray-200 font-semibold hover:underline">
+                    {{ $sequence->name }} 
+                    ({{ __('Assigned:') }} {{ $sequence->pivot->included_at->format('d/m/Y') }},
+                     {{ __('Starts:') }} {{ $sequence->pivot->start_at->format('d/m/Y') }})
+                </summary>
+    
+                <div class="ml-4 mt-2 space-y-2">
+                    @forelse ($sequence->pivot->calculated_dates as $step)
+                        <div class="p-3 bg-white dark:bg-gray-900 border rounded-lg shadow-sm">
+                            <p class="text-sm text-gray-700 dark:text-gray-300">
+                                <strong>{{ __('Date:') }}</strong> {{ \Carbon\Carbon::parse($step['send_date'])->translatedFormat('l, d F Y') }}
+                            </p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300">
+                                <strong>{{ __('Goal:') }}</strong> {{ $step['goal'] ?? '-' }}
+                            </p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line mt-1">
+                                {{ $step['message'] }}
+                            </p>
+                        </div>
+                    @empty
+                        <p class="text-gray-500 dark:text-gray-400 italic">{{ __('No steps found.') }}</p>
+                    @endforelse
+                </div>
+            </details>
         @empty
             <p class="text-gray-500 dark:text-gray-400">{{ __('No sequences assigned.') }}</p>
         @endforelse
-    </div>    
+    </div>
+
+    
     <div class="flex justify-end mt-6">
         <flux:button as="a" href="{{ route('prospects.edit', $prospect->id) }}" variant="primary">
             {{ __('Edit prospect') }}
