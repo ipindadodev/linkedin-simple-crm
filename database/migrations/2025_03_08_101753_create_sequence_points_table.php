@@ -17,7 +17,7 @@ return new class extends Migration
         
             $table->integer('order');
             $table->text('message');
-            $table->enum('time_type', ['daily', 'weekly', 'monthly', 'quarterly', 'dynamic']);
+            $table->enum('time_type', ['daily', 'weekly', 'monthly', 'quarterly', 'yearly', 'dynamic']);
             $table->enum('day_of_week', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])->nullable();
             $table->tinyInteger('day_of_month')->nullable();
             $table->integer('days_after_start')->nullable();
