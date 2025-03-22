@@ -22,8 +22,16 @@ class Sequence extends Model
     // Relación con Prospects (Muchos a Muchos)
     public function prospects()
     {
-        return $this->belongsToMany(Prospect::class, 'contact_sequences')
-                    ->withPivot('included_at')
+        return $this->belongsToMany(Prospect::class, 'contact_sequence')
+                    ->withPivot(['included_at', 'start_at', 'calculated_dates'])
                     ->withTimestamps();
+    }
+
+    // Relationship with ContactSequences (One to Many)
+    // Relación con ContactSequences (Uno a Muchos)
+    // Pivot table: contact_sequences
+    public function contactSequences()
+    {
+        return $this->hasMany(ContactSequence::class);
     }
 }
