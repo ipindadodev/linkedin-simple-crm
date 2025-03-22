@@ -149,5 +149,11 @@
     "Create location": "Crear ubicación",
     "Edit location": "Editar ubicación",
     "Create account": "Crear cuenta",
-    "Send date:": "Fecha de envío:"
+    "Send date:": "Fecha de envío:",
+    "Already have an account?": "¿Ya tienes una cuenta?",
+    "Log in": "Iniciar sesión",
+    "Create an account": "Crear una cuenta",
+    "Enter your details below to create your account": "Ingresa tus datos a continuación para crear tu cuenta",
+    "Full name": "Nombre completo",
+    "email@example.com": "tu@nomail.com"
 }
