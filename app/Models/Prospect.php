@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ContactSequence;
 
 class Prospect extends Model
 {
@@ -55,8 +56,9 @@ class Prospect extends Model
     public function sequences()
     {
         return $this->belongsToMany(Sequence::class, 'contact_sequence')
-                    ->withPivot(['included_at', 'start_at', 'calculated_dates'])
-                    ->withTimestamps();
+            ->using(ContactSequence::class)
+            ->withPivot(['included_at', 'start_at', 'calculated_dates'])
+            ->withTimestamps();
     }
 
     // Relationship with ContactSequences (One to Many)
