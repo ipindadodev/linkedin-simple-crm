@@ -21,14 +21,19 @@ class Show extends Component
     
     private function prepareSequencePoints()
     {
-        $startDate = Carbon::now(); // Suponiendo que la secuencia inicia hoy
-
-        $this->sequencePoints = $this->sequence->sequence_points->map(function ($point) use ($startDate) {
-            $originalSendDate = $this->calculateSendDate($point, $startDate);
+        $currentDate = Carbon::now(); // Suponiendo que la secuencia inicia hoy
+        $this->startDate = $currentDate->translatedFormat('l, j F Y');
+    
+        $points = $this->sequence->sequence_points->sortBy('order'); // asegúrate de que van en orden
+    
+        $this->sequencePoints = [];
+    
+        foreach ($points as $point) {
+            $originalSendDate = $this->calculateSendDate($point, $currentDate);
             $postponedDate = $this->adjustToNextBusinessDay($originalSendDate);
             $wasPostponed = $originalSendDate->ne($postponedDate);
-
-            return [
+    
+            $this->sequencePoints[] = [
                 'order' => $point->order,
                 'message' => $point->message,
                 'time_type' => $this->translateTimeType($point->time_type),
@@ -37,8 +42,14 @@ class Show extends Component
                 'original_date' => $wasPostponed ? $originalSendDate->translatedFormat('l, j F Y') : null,
                 'postponed' => $wasPostponed,
             ];
-        })->toArray();
+    
+            // 👉 Avanzamos la fecha base SOLO si se indica "después del anterior"
+            if ($point->time_type === 'dynamic' && $point->days_after_previous) {
+                $currentDate = $originalSendDate->copy();
+            }
+        }
     }
+    
 
     private function translateTimeType(string $type): string
     {
