@@ -83,6 +83,9 @@
 
     <!-- Sección de Secuencias -->
     <flux:heading class="mb-4 mt-6">{{ __('Sequences') }}</flux:heading>
+
+    <livewire:components.assign-sequence-to-prospect :prospect="$prospect" />
+    
     <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow">
         @forelse ($prospect->sequences as $sequence)
             <p class="text-gray-700 dark:text-gray-300">
@@ -92,8 +95,7 @@
         @empty
             <p class="text-gray-500 dark:text-gray-400">{{ __('No sequences assigned.') }}</p>
         @endforelse
-    </div>
-
+    </div>    
     <div class="flex justify-end mt-6">
         <flux:button as="a" href="{{ route('prospects.edit', $prospect->id) }}" variant="primary">
             {{ __('Edit prospect') }}
