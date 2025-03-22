@@ -25,6 +25,30 @@
             <flux:input wire:model.defer="order" label="{{ __('Order') }}" required disabled/>
         </div>
 
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                {{ __('Insert dynamic field') }}
+            </label>
+            <div class="flex flex-wrap gap-2">
+                @php
+                    $placeholders = [
+                        'first_name', 'last_name', 'second_last_name', 'email',
+                        'phone', 'company', 'linkedin_url', 'location.name'
+                    ];
+                @endphp
+        
+                @foreach ($placeholders as $field)
+                    <button type="button"
+                        class="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-sm rounded hover:bg-gray-300 dark:hover:bg-gray-600"
+                        onclick="insertPlaceholder('{{$field}}')">
+                        {{ '{' . $field . '}' }}
+                    </button>
+                @endforeach
+            </div>
+        </div>
+
+        {{-- <textarea wire:model.live="message" class="w-full p-2 border rounded-md"></textarea> --}}
+
         <flux:textarea wire:model.defer="message" label="{{ __('Message') }}" required />
 
         <div class="grid grid-cols-3 gap-6 mb-6 mt-6">
@@ -66,3 +90,21 @@
         </div>
     </form>
 </div>
+
+<script>
+    function insertPlaceholder(field) {
+        const textarea = document.querySelector('[wire\\:model\\.defer="message"]');
+        if (!textarea) return;
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const text = textarea.value;
+
+        const placeholder = `{\${${field}}}`;
+
+        textarea.value = text.slice(0, start) + placeholder + text.slice(end);
+        textarea.dispatchEvent(new Event('input')); // Actualiza Livewire
+        textarea.focus();
+        textarea.selectionStart = textarea.selectionEnd = start + placeholder.length;
+    }
+</script>

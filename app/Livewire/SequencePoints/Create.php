@@ -45,6 +45,24 @@ class Create extends Component
         $this->updatedTimeType();
     }
 
+    #[\Livewire\Attributes\Computed]
+    public function preview()
+    {
+        $placeholders = [
+            '{$first_name}' => 'Juan',
+            '{$last_name}' => 'Pérez',
+            '{$second_last_name}' => 'García',
+            '{$email}' => 'juan.perez@example.com',
+            '{$phone}' => '+34 600 123 456',
+            '{$company}' => 'Acme Corp',
+            '{$linkedin_url}' => 'https://linkedin.com/in/juanperez',
+            '{$location.name}' => 'Madrid',
+        ];
+
+        return strtr($this->message, $placeholders);
+    }
+
+
     public function updatedSequenceId()
     {
         Log::info('updatedSequenceId ejecutado. sequence_id:', ['sequence_id' => $this->sequence_id]);
