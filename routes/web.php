@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\SetLocale;
 use Livewire\Volt\Volt;
 
-// Importación correcta de componentes Livewire
 use App\Livewire\ProspectStatuses\ProspectStatusesIndex;
 use App\Livewire\Prospects\ProspectsIndex;
 use App\Livewire\SequencePoints\SequencePointsIndex;
@@ -24,6 +23,10 @@ use App\Livewire\Sequences\Index as SequencesIndex;
 use App\Livewire\SequencePoints\Create as SequencePointCreate;
 use App\Livewire\SequencePoints\Edit as SequencePointEdit;
 use App\Livewire\SequencePoints\Show as SequencePointShow;
+
+use App\Livewire\Locations\Index;
+use App\Livewire\Locations\Create;
+use App\Livewire\Locations\Edit;
 
 // Página de bienvenida
 Route::get('/', function () {
@@ -69,6 +72,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sequence-points/create', SequencePointCreate::class)->name('sequence-points.create');
     Route::get('/sequence-points/edit/{id}', SequencePointEdit::class)->name('sequence-points.edit');
     Route::get('/sequence-points/{id}', SequencePointShow::class)->name('sequence-points.show');
+
+    // Locations CRUD
+    Route::get('/locations', Index::class)->name('locations.index');
+    Route::get('/locations/create', Create::class)->name('locations.create');
+    Route::get('/locations/edit/{id}', Edit::class)->name('locations.edit');
 });
 
 // Autenticación
