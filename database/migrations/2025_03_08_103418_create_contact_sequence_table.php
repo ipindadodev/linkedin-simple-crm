@@ -12,6 +12,8 @@ return new class extends Migration {
             $table->foreignId('prospect_id')->constrained('prospects')->cascadeOnDelete();
             $table->foreignId('sequence_id')->constrained('sequences')->cascadeOnDelete();
             $table->timestamp('included_at')->nullable();
+            $table->timestamp('start_at')->nullable();
+            $table->json('calculated_dates')->nullable();
             $table->timestamps();
         });
     }
