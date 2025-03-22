@@ -9,7 +9,7 @@ class Show extends Component
 {
     public Prospect $prospect;
 
-    protected $listeners = ['interactionUpdated' => 'refreshProspect'];
+    protected $listeners = ['interactionUpdated' => 'refreshProspect', 'refreshProspect' => 'refreshProspect'];
 
     public function mount($id)
     {
