@@ -11,13 +11,20 @@ class SetLocale
 {
     public function handle(Request $request, Closure $next)
     {
-        // Si el usuario está autenticado, establecer el idioma desde la base de datos
-        if (Auth::check()) {
-            App::setLocale(Auth::user()->language);
-        } 
-        // Si el idioma está almacenado en sesión, usarlo
-        elseif (session()->has('locale')) {
+        // Si el idioma está en sesión, se prioriza
+        if (session()->has('locale')) {
             App::setLocale(session('locale'));
+        }
+
+        // Si el usuario está autenticado y no hay idioma en sesión, se usa el de BD
+        elseif (Auth::check() && Auth::user()->language) {
+            App::setLocale(Auth::user()->language);
+            session()->put('locale', Auth::user()->language); // sincroniza la sesión
+        }
+
+        // Si no hay nada, usa el idioma por defecto del sistema
+        else {
+            App::setLocale(config('app.locale'));
         }
 
         return $next($request);
