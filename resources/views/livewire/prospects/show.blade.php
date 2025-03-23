@@ -1,6 +1,22 @@
 <div class="w-full h-8xl mx-auto bg-white dark:bg-gray-900 p-8 rounded-xl shadow-md overflow-y-auto">
     <flux:heading size="lg" class="mb-6 text-center">{{ __('Prospect details') }}</flux:heading>
 
+    @if ($nextStep)
+        <div class="mb-6 text-sm text-gray-700 dark:text-gray-300 bg-yellow-50 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 p-4 rounded-lg shadow">
+            <strong>{{ __('Next step to execute:') }}</strong><br>
+            {{ \Carbon\Carbon::parse($nextStep['send_date'])->translatedFormat('l, d F Y') }}
+            – {{ $nextStep['goal'] ?? __('No goal') }}
+            <span class="block mt-1 italic text-gray-500 dark:text-gray-400">
+                ({{ __('In sequence:') }} {{ $nextStep['sequence_name'] }})
+            </span>
+        </div>
+    @else
+        <div class="mb-6 text-sm italic text-green-700 dark:text-green-300">
+            {{ __('All sequences completed. No pending steps.') }}
+        </div>
+    @endif
+
+
     <!-- Información general -->
     <div class="grid grid-cols-3 gap-6 mb-6">
         <div>
