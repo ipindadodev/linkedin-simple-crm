@@ -4,7 +4,6 @@ namespace App\Livewire\Components;
 
 use Livewire\Component;
 use App\Models\ContactSequence;
-// app/Livewire/Components/ToggleStepStatus.php
 
 class ToggleStepStatus extends Component
 {
@@ -13,18 +12,20 @@ class ToggleStepStatus extends Component
     public int $stepIndex;
     public bool $done = false;
 
-    public function toggle()
+    public function toggle(): void
     {
-        $cs = ContactSequence::where('prospect_id', $this->prospectId)
-                             ->where('sequence_id', $this->sequenceId)
-                             ->firstOrFail();
+        $cs = ContactSequence::query()
+            ->where('prospect_id', $this->prospectId)
+            ->where('sequence_id', $this->sequenceId)
+            ->firstOrFail();
 
         $steps = $cs->calculated_dates;
 
-        if (!isset($steps[$this->stepIndex])) return;
+        if (!isset($steps[$this->stepIndex])) {
+            return;
+        }
 
         $isDone = !empty($steps[$this->stepIndex]['done']);
-
         $steps[$this->stepIndex]['done'] = !$isDone;
 
         if ($isDone) {
