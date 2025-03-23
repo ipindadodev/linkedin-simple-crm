@@ -18,5 +18,10 @@ class DatabaseSeeder extends Seeder
             InitialProspectSeeder::class,
             InitialSequencePointMessagesSeeder::class,
         ]);
+    
+        // Verificar si el archivo del seeder existe y ejecutarlo si es así
+        if (file_exists(database_path('seeders/InitialUserSeeder.php'))) {
+            $this->call(InitialUserSeeder::class);
+        }
     }    
 }
