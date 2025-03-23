@@ -16,7 +16,7 @@ new class extends Component {
     {
         $user = Auth::user();
         $user->update(['language' => $this->language]);
-        
+
         session()->put('locale', $this->language);
 
         return redirect(request()->header('Referer') ?? '/');
