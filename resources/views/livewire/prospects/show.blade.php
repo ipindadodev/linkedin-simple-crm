@@ -113,32 +113,7 @@
                         {{ __('All steps completed.') }}
                     </div>
                 @endif
-
-                @php
-                $replacements = [
-                    '{$first_name}' => $prospect->first_name,
-                    '{${first_name}}' => $prospect->first_name,
-                    '{$last_name}' => $prospect->last_name,
-                    '{${last_name}}' => $prospect->last_name,
-                    '{$second_last_name}' => $prospect->second_last_name,
-                    '{${second_last_name}}' => $prospect->second_last_name,
-                    '{$email}' => $prospect->email,
-                    '{${email}}' => $prospect->email,
-                    '{$phone}' => $prospect->phone,
-                    '{${phone}}' => $prospect->phone,
-                    '{$company}' => $prospect->company,
-                    '{${company}}' => $prospect->company,
-                    '{$linkedin_url}' => $prospect->linkedin_url,
-                    '{${linkedin_url}}' => $prospect->linkedin_url,
-                    '{$location.name}' => $prospect->location->name ?? '',
-                    '{${location.name}}' => $prospect->location->name ?? '',
-                ];
-            
-                function replacePlaceholdersInline($text, $replacements) {
-                    return str_replace(array_keys($replacements), array_values($replacements), $text);
-                }
-            @endphp            
-
+                
                 <div class="ml-4 mt-4 space-y-2">
                     @forelse ($sequence->pivot->calculated_dates as $index => $step)
                     @php $done = !empty($step['done']); @endphp
@@ -173,8 +148,8 @@
                             <strong>{{ __('Goal:') }}</strong> {{ $step['goal'] ?? '-' }}
                         </p>
                         <p class="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line mt-1">
-                            {{ replacePlaceholdersInline($step['message'], $replacements) }}
-                        </p>                                          
+                            {{ replace_placeholders($step['message'], $prospect) }}
+                        </p>                                                             
                     </div>
                 @empty
                     <p class="text-gray-500 dark:text-gray-400 italic">{{ __('No steps found.') }}</p>
