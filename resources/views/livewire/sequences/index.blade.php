@@ -1,4 +1,4 @@
-<div>
+<section>
     <h2 class="mb-8">{{ __('Sequences') }}</h2>
 
     <flux:separator class="mt-8 mb-8" />
@@ -25,4 +25,4 @@
         :allowDeleting="true"
         :allowViewing="true"
     />
-</div>
+</section>
