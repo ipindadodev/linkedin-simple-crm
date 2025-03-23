@@ -113,7 +113,7 @@
                         {{ __('All steps completed.') }}
                     </div>
                 @endif
-                
+
                 <div class="ml-4 mt-4 space-y-2">
                     @forelse ($sequence->pivot->calculated_dates as $index => $step)
                     @php $done = !empty($step['done']); @endphp
@@ -147,7 +147,7 @@
                         <p class="text-sm text-gray-700 dark:text-gray-300">
                             <strong>{{ __('Goal:') }}</strong> {{ $step['goal'] ?? '-' }}
                         </p>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line mt-1">
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
                             {{ replace_placeholders($step['message'], $prospect) }}
                         </p>                                                             
                     </div>
