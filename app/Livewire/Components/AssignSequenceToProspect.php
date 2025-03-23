@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Components;
 
-use Livewire\Component;
 use App\Models\Prospect;
 use App\Models\Sequence;
+use Livewire\Component;
 use App\Services\ContactSequenceService;
 
 class AssignSequenceToProspect extends Component
@@ -15,29 +15,30 @@ class AssignSequenceToProspect extends Component
     public function assign()
     {
         $this->validate([
-            'sequence_id' => 'required|exists:sequences,id',
+            'sequence_id' => ['required', 'exists:sequences,id'],
         ]);
 
         try {
-            $sequence = Sequence::findOrFail($this->sequence_id);
+            $sequence = Sequence::find($this->sequence_id);
             app(ContactSequenceService::class)->assign($this->prospect, $sequence);
 
-            session()->flash('success', __('Sequence assigned successfully!'));
+            $this->dispatch('sequenceAssigned');
+            $this->dispatch('notify', __('Sequence assigned successfully!'));
+
             $this->reset('sequence_id');
 
-            // Opcional: emitir evento para refrescar si es necesario
-            $this->dispatch('sequenceAssigned');
-        } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
+            redirect()->route('prospects.show', $this->prospect);
+        } catch (\Throwable $e) {
+            $this->dispatch('notify', $e->getMessage()); // podrías mostrarlo como toast si lo prefieres
         }
     }
 
     public function render()
     {
-        $availableSequences = Sequence::whereNotIn('id', $this->prospect->sequences->pluck('id'))->pluck('name', 'id');
-
         return view('livewire.components.assign-sequence-to-prospect', [
-            'availableSequences' => $availableSequences,
+            'availableSequences' => Sequence::whereDoesntHave('prospects', fn ($q) =>
+                $q->where('prospect_id', $this->prospect->id)
+            )->pluck('name', 'id'),
         ]);
     }
 }
