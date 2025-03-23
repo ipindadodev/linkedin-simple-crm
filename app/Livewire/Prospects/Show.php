@@ -11,27 +11,11 @@ class Show extends Component
 
     protected $listeners = ['interactionUpdated' => 'refreshProspect', 'refreshProspect' => 'refreshProspect'];
 
-    protected function replacePlaceholders(string $text, \App\Models\Prospect $prospect): string
-    {
-        $replacements = [
-            '{$first_name}' => $prospect->first_name,
-            '{$last_name}' => $prospect->last_name,
-            '{$second_last_name}' => $prospect->second_last_name,
-            '{$email}' => $prospect->email,
-            '{$phone}' => $prospect->phone,
-            '{$company}' => $prospect->company,
-            '{$linkedin_url}' => $prospect->linkedin_url,
-            '{$location.name}' => $prospect->location->name ?? '',
-        ];
-
-        return str_replace(array_keys($replacements), array_values($replacements), $text);
-    }
-
-
     public function mount($id)
     {
-        $this->prospect = Prospect::with(['location', 'status', 'industry', 'interactions', 'sequences'])
-            ->findOrFail($id);
+        $this->prospect = Prospect::with([
+            'location', 'status', 'industry', 'interactions', 'sequences'
+        ])->findOrFail($id);
 
         $this->dispatch('setProspectId', $this->prospect->id);
     }
@@ -45,8 +29,6 @@ class Show extends Component
     {
         return view('livewire.prospects.show', [
             'prospect' => $this->prospect,
-            'replacePlaceholders' => fn ($text) => $this->replacePlaceholders($text, $this->prospect),
         ]);
     }
-    
 }
