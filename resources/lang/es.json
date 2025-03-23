@@ -187,5 +187,10 @@
     "Confirm": "Confirmar",
     "Select option": "Seleccionar opción",
     "Pagination": "Paginación",
-    "Upcoming task for": "Próxima tarea para"
+    "Upcoming task for": "Próxima tarea para",
+    "Every": "Cada",
+    "Every month on day": "Cada mes el día",
+    "Create sequence": "Crear secuencia",
+    "Edit sequence fields": "Editar campos de secuencia",
+    "postponed from": "pospuesto desde"
 }
