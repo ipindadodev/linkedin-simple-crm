@@ -11,43 +11,43 @@ class DashboardTodos extends Component
     public array $todos = [];
     public array $upcoming = [];
 
-    public function mount()
+    public function mount(): void
     {
-        $today = Carbon::today();
-        $nextWeek = Carbon::today()->addWeek()->endOfWeek();
+        $today = now()->startOfDay();
+        $nextWeek = now()->addWeek()->endOfWeek();
+
+        $prospects = Prospect::with('sequences')->get();
 
         $this->todos = [];
         $upcomingSteps = [];
-
-        $prospects = Prospect::with(['sequences'])->get();
 
         foreach ($prospects as $prospect) {
             $pendingToday = [];
 
             foreach ($prospect->sequences as $sequence) {
                 foreach ($sequence->pivot->calculated_dates ?? [] as $index => $step) {
-                    if (empty($step['done'])) {
-                        $sendDate = Carbon::parse($step['send_date']);
+                    if (!empty($step['done'])) continue;
 
-                        $entry = [
-                            'prospect' => $prospect,
-                            'sequence' => $sequence->name,
-                            'stepIndex' => $index,
-                            'goal' => $step['goal'] ?? '-',
-                            'send_date' => $sendDate,
-                            'message' => replace_placeholders($step['message'], $prospect),
-                        ];
+                    $sendDate = Carbon::parse($step['send_date']);
 
-                        if ($sendDate->lessThanOrEqualTo($today)) {
-                            $pendingToday[] = $entry;
-                        } elseif ($sendDate->isBetween($today->copy()->addDay(), $nextWeek)) {
-                            $upcomingSteps[] = $entry;
-                        }
+                    $entry = [
+                        'prospect' => $prospect,
+                        'sequence' => $sequence->name,
+                        'stepIndex' => $index,
+                        'goal' => $step['goal'] ?? '-',
+                        'send_date' => $sendDate,
+                        'message' => replace_placeholders($step['message'], $prospect),
+                    ];
+
+                    if ($sendDate->isSameDay($today) || $sendDate->lessThan($today)) {
+                        $pendingToday[] = $entry;
+                    } elseif ($sendDate->isBetween($today->copy()->addDay(), $nextWeek)) {
+                        $upcomingSteps[] = $entry;
                     }
                 }
             }
 
-            if (!empty($pendingToday)) {
+            if ($pendingToday) {
                 $this->todos[] = [
                     'prospect' => $prospect,
                     'steps' => $pendingToday,
@@ -55,9 +55,7 @@ class DashboardTodos extends Component
             }
         }
 
-        // Ordenar pasos futuros globalmente por fecha
-        usort($upcomingSteps, fn($a, $b) => $a['send_date']->timestamp <=> $b['send_date']->timestamp);
-
+        usort($upcomingSteps, fn ($a, $b) => $a['send_date']->timestamp <=> $b['send_date']->timestamp);
         $this->upcoming = $upcomingSteps;
     }
 
