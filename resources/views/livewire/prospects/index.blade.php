@@ -1,4 +1,4 @@
-<div>
+<section>
     <h2 class="mb-8">{{ __('Prospects') }}</h2>
 
 
@@ -35,4 +35,4 @@
             'industry_id' => ['relation' => 'industry', 'field' => 'name'],
         ]"
     />
-</div>
+</section>
