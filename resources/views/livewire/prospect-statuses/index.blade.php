@@ -1,4 +1,4 @@
-<div>
+<section>
     <h2 class="mb-8">{{ __('Prospect statuses') }}</h2>
 
 
@@ -25,4 +25,4 @@
         :allowEditing="true"
         :allowDeleting="true"
     />
-</div>
+</section>
