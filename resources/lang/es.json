@@ -172,5 +172,14 @@
     "Done": "Completado",
     "Undo": "Deshacer",
     "No goal": "Sin objetivo",
-    "Dashboard": "Escritorio"
+    "Dashboard": "Escritorio",
+    "Next step to execute:": "Siguiente paso a ejecutar:",
+    "In sequence:": "En la secuencia:",
+    "All sequences completed. No pending steps.": "Todas las secuencias completadas. No hay pasos pendientes.",
+    "Pending tasks for today": "Tareas pendientes para hoy",
+    "View prospect": "Ver prospecto",
+    "Sequence:": "Secuencia:",
+    "No tasks pending for today.": "No hay tareas pendientes para hoy.",
+    "Upcoming tasks for the week": "Próximas tareas para la semana",
+    "No upcoming tasks for the next days.": "No hay tareas pendientes para los próximos días."
 }
