@@ -183,5 +183,9 @@
     "Upcoming tasks for the week": "Próximas tareas para la semana",
     "No upcoming tasks for the next days.": "No hay tareas pendientes para los próximos días.",
     "Record deleted successfully.": "Registro eliminado correctamente.",
-    "Record not found.": "Registro no encontrado."
+    "Record not found.": "Registro no encontrado.",
+    "Confirm": "Confirmar",
+    "Select option": "Seleccionar opción",
+    "Pagination": "Paginación",
+    "Upcoming task for": "Próxima tarea para"
 }
