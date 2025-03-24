@@ -13,6 +13,8 @@
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
     </head>
+
+<flux:main>
     <body class="bg-gradient-to-r from-[#0f172a]  to-[#334155] dark:bg-gradient-to-bl dark:from-[#0f172a] dark:via-[#1e1a78] dark:to-[#0f172a] text-[#fefefe] dark:text-[#fefefe] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
     <!-- Desde aquí lienzo en blanco -->
     <section class="">
@@ -55,3 +57,4 @@
         </section>
         @endif
     </section>
+</flux:main>
