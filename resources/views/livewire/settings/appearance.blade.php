@@ -35,17 +35,17 @@ new class extends Component {
             <flux:radio value="system" icon="computer-desktop">{{ __('System') }}</flux:radio>
         </flux:radio.group>
 
-        <div class="mt-8"> </div>
+        {{-- <div class="mt-8"> </div>
 
         <flux:separator />
 
-        <div class="mb-8"> </div>
+        <div class="mb-8"> </div> --}}
 
-        <!-- Selector de idioma en Flux -->
+        {{-- <!-- Selector de idioma en Flux -->
         <flux:select wire:model="language" wire:change="saveLanguage" placeholder="{{ __('Choose language...') }}">
             <flux:select.option value="en">{{ __('English') }}</flux:select.option>
             <flux:select.option value="es">{{ __('Spanish') }}</flux:select.option>
-        </flux:select>
+        </flux:select> --}}
 
     </x-settings.layout>
 </div>
