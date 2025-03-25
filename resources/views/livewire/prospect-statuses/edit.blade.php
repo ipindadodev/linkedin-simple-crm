@@ -4,6 +4,7 @@
     </flux:heading>
 
     <form wire:submit.prevent="update">
+        @csrf
         <!-- Nombre y Código -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <flux:input wire:model.defer="name" label="{{ __('Name') }}" required />

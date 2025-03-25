@@ -23,6 +23,7 @@
     @endif
 
     <form wire:submit.prevent="update">
+        @csrf
         <section class="grid grid-cols-1 gap-6 mb-6" aria-labelledby="edit-sequence-fields">
             <h2 id="edit-sequence-fields" class="sr-only">{{ __('Edit sequence fields') }}</h2>
 

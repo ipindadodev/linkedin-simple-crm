@@ -6,6 +6,7 @@
     </header>
 
     <form wire:submit.prevent="update" aria-label="{{ __('Edit location') }}">
+        @csrf
         <fieldset class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <legend class="sr-only">{{ __('Location details') }}</legend>
 

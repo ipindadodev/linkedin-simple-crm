@@ -29,6 +29,7 @@
 
                 <!-- Formulario -->
                 <form wire:submit.prevent="save" class="flex flex-col flex-grow" aria-describedby="form-description">
+                    @csrf
                     <div class="mb-6">
                         <flux:input wire:model.defer="title" label="{{ __('Title') }}" required />
                         @error('title') 

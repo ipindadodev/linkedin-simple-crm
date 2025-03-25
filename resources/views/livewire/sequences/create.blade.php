@@ -6,8 +6,9 @@
     </header>
 
     <form wire:submit.prevent="save">
+        @csrf
         <section class="grid grid-cols-1 gap-6 mb-6" aria-labelledby="sequence-fields">
-            <h2 id="sequence-fields" class="sr-only">{{ __('Sequence Fields') }}</h2>
+            <h2 id="sequence-fields" class="sr-only">{{ __('Sequence fields') }}</h2>
 
             <flux:input wire:model.defer="code" label="{{ __('Code') }}" required />
             <flux:input wire:model.defer="name" label="{{ __('Name') }}" required />

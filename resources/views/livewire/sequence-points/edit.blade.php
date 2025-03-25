@@ -21,6 +21,7 @@
     @endif
 
     <form wire:submit.prevent="update">
+        @csrf
         <fieldset class="grid grid-cols-2 gap-6 mb-6">
             <flux:select wire:model="sequence_id" label="{{ __('Select sequence') }}" required>
                 <flux:select.option value="">{{ __('Select sequence') }}</flux:select.option>

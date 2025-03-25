@@ -20,6 +20,7 @@
 
     <!-- Formulario -->
     <form wire:submit.prevent="assign" class="flex gap-4 items-end" aria-describedby="assign-sequence-description">
+        @csrf
         <fieldset class="flex-1">
             <legend id="assign-sequence-section" class="sr-only">
                 {{ __('Assign sequence to prospect') }}

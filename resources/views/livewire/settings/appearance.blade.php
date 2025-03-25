@@ -4,7 +4,7 @@ use Livewire\Volt\Component;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
-new class extends Component {
+return new class extends Component {
     public string $language;
 
     public function mount()
@@ -14,19 +14,14 @@ new class extends Component {
 
     public function saveLanguage()
     {
-
-        // Actualizar el idioma del usuario en la base de datos (campo language)
-        // La actualización debe ser automática, sin necesidad de presionar un input submit
-        // Solo con seleccionar un idioma en el select, se debe actualizar el idioma en la base de datos
         Auth::user()->update([
-            'language' => $this->language
+            'language' => $this->language,
         ]);
 
-        // Actualizar el idioma de la aplicación
         App::setLocale($this->language);
 
-        // Refrescar la página para que los cambios se apliquen
-        return redirect()->to(request()->url());
+        // Recargar la página para aplicar la traducción inmediatamente
+        return redirect(request()->url());
     }
 };
 ?>

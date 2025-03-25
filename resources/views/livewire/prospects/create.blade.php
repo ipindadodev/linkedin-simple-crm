@@ -2,6 +2,7 @@
     <flux:heading size="lg" class="mb-8 text-center">{{ __('Create prospect') }}</flux:heading>
 
     <form wire:submit.prevent="save">
+        @csrf
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <flux:input wire:model.defer="first_name" label="{{ __('First name') }}" required />
             <flux:input wire:model.defer="last_name" label="{{ __('Last name') }}" required />

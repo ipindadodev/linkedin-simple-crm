@@ -6,6 +6,7 @@
     </header>
 
     <form wire:submit="save" aria-label="{{ __('Create location') }}">
+        @csrf
         <fieldset class="grid grid-cols-2 gap-4">
             <legend class="sr-only">{{ __('Location details') }}</legend>
 

@@ -15,6 +15,7 @@
     @endif
 
     <form wire:submit.prevent="save">
+        @csrf
         <fieldset class="grid grid-cols-2 gap-6 mb-6">
             <legend class="sr-only">{{ __('Sequence point basic info') }}</legend>
             <flux:select wire:model="sequence_id" label="{{ __('Select sequence') }}" required>
