@@ -201,5 +201,14 @@
     "Web": "Web",
     "First Name": "Nombre",
     "Last Name": "Primer apellido",
-    "Second Last Name": "Segundo apellido"
+    "Second Last Name": "Segundo apellido",
+    "Galician": "Gallego",
+    "Basque": "Euskera",
+    "Catalan": "Catalán",
+    "Spanish (Colombia)": "Español (Colombia)",
+    "Spanish (Mexico)": "Español (México)",
+    "Spanish (Argentina)": "Español (Argentina)",
+    "Spanish (Chile)": "Español (Chile)",
+    "Spanish (Peru)": "Español (Perú)",
+    "Spanish (United States)": "Español (Estados Unidos)"
 }
