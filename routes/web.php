@@ -28,6 +28,10 @@ use App\Livewire\Locations\Index;
 use App\Livewire\Locations\Create;
 use App\Livewire\Locations\Edit;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+
 // Página de bienvenida
 Route::get('/', function () {
     return view('welcome');
@@ -47,6 +51,28 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+
+// GET → componente Volt
+Volt::route('/settings/language', 'settings.language')
+    ->name('settings.language')
+    ->middleware(['auth']);
+
+// POST → lógica para guardar idioma
+Route::post('/settings/langChange', function (Request $request) {
+    $language = $request->input('language', 'en');
+
+    if (Auth::check()) {
+        Auth::user()->update(['language' => $language]);
+        Auth::user()->language = $language;
+    }
+
+    session()->put('locale', $language);
+    session()->save();
+    App::setLocale($language);
+
+    return redirect()->back();
+})->name('settings.langChange')->middleware(['auth']);
+    
 // Grupo de rutas protegidas por autenticación
 Route::middleware(['auth'])->group(function () {
 
