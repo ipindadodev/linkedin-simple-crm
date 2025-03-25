@@ -201,5 +201,14 @@
     "Web": "Web",
     "First Name": "Nom",
     "Last Name": "Primer cognom",
-    "Second Last Name": "Segon cognom"
+    "Second Last Name": "Segon cognom",
+    "Galician": "Gallec",
+    "Basque": "Basc",
+    "Catalan": "Català",
+    "Spanish (Colombia)": "Espanyol (Colòmbia)",
+    "Spanish (Mexico)": "Espanyol (Mèxic)",
+    "Spanish (Argentina)": "Espanyol (Argentina)",
+    "Spanish (Chile)": "Espanyol (Xile)",
+    "Spanish (Peru)": "Espanyol (Perú)",
+    "Spanish (United States)": "Espanyol (Estats Units)"
 }
