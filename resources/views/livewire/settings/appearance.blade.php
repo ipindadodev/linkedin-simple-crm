@@ -4,7 +4,7 @@ use Livewire\Volt\Component;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
-return new class extends Component {
+new class extends Component {
     public string $language;
 
     public function mount()
@@ -20,10 +20,10 @@ return new class extends Component {
 
         App::setLocale($this->language);
 
-        // Recargar la página para aplicar la traducción inmediatamente
-        return redirect(request()->url());
+        return redirect()->to(request()->url());
     }
 };
+
 ?>
 
 <div class="flex flex-col items-start">
