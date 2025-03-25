@@ -21,6 +21,7 @@ class Prospect extends Model
         'email',
         'phone',
         'company',
+        'web',
     ];
 
     // Relationship with ProspectStatus (One to One)
