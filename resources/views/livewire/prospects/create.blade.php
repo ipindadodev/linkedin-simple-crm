@@ -19,6 +19,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <flux:input wire:model.defer="company" label="{{ __('Company') }}" />
+            <flux:input wire:model.defer="web" label="{{ __('Web') }}" />
         </div>
 
         <!-- Selects con búsqueda -->

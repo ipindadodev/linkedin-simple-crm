@@ -11,7 +11,7 @@ use App\Models\ProspectIndustry;
 class Create extends Component
 {
     public $first_name, $last_name, $second_last_name, $linkedin_url;
-    public $location_id, $status_id, $industry_id, $email, $phone, $company;
+    public $location_id, $status_id, $industry_id, $email, $phone, $company, $web;
 
     protected $listeners = ['updateModel'];
 
@@ -36,6 +36,7 @@ class Create extends Component
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:255',
             'company' => 'nullable|string|max:255',
+            'web' => 'nullable|url|max:255',
         ];
     }
 
@@ -54,6 +55,7 @@ class Create extends Component
             'email' => $this->email,
             'phone' => $this->phone,
             'company' => $this->company,
+            'web' => $this->web,
         ]);
 
         session()->flash('message', 'Prospect created successfully.');
