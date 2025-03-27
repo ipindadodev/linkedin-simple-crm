@@ -32,6 +32,10 @@ return new class extends Migration
         
             $table->timestamps();
         });
+
+        Schema::table('interactions', function (Blueprint $table) {
+            $table->foreign('prospect_id')->references('id')->on('prospects')->cascadeOnDelete();
+        });
         
     }
 
@@ -41,5 +45,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('prospects');
+
+        Schema::table('interactions', function (Blueprint $table) {
+            $table->dropForeign(['prospect_id']);
+        });
     }
 };
