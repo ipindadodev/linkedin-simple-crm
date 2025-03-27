@@ -6,26 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('interactions', function (Blueprint $table) {
             $table->id();
-            // Relationship with the prospects table
-            $table->foreignId('prospect_id')->constrained('prospects')->cascadeOnDelete();
-            
+            $table->unsignedBigInteger('prospect_id');
             $table->string('title');
             $table->text('description');            
             $table->timestamps();
         });
-        
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('interactions');
