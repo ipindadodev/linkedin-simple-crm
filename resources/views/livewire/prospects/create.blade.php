@@ -10,7 +10,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <flux:input wire:model.defer="second_last_name" label="{{ __('Second last name') }}" />
-            <flux:input wire:model.defer="linkedin_url" label="{{ __('LinkedIn URL') }}" type="url" />
+            <flux:input wire:model.defer="linkedin_url" label="{{ __('LinkedIn URL') }}" type="url"  required/>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
