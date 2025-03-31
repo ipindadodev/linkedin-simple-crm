@@ -23,8 +23,9 @@
             'location_id' => __('Location'),
             'status_id' => __('Status'),
             'industry_id' => __('Industry'),
+            'created_at' => __('Created at'),
         ]"
-        :sortable="['first_name', 'location_id', 'status_id', 'industry_id']"
+        {{-- :sortable="['first_name', 'location_id', 'status_id', 'industry_id']" --}}
         :searchable="['first_name', 'last_name', 'second_last_name']"
         :allowEditing="true"
         :allowDeleting="true"
