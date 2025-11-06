@@ -6,6 +6,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     public function run()
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
             InitialSequencesSeeder::class,
             InitialProspectSeeder::class,
             InitialSequencePointMessagesSeeder::class,
+            InitialDummyUserSeeder::class,
         ]);
     
         // Verificar si el archivo del seeder existe y ejecutarlo si es así
