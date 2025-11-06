@@ -48,10 +48,10 @@
                     <footer class="flex justify-between mt-6 space-x-4">
                         <div class="text-gray-500 dark:text-gray-400 text-sm">
                             @if($interactionId)
-                                <time datetime="{{ \Carbon\Carbon::parse($created_at)->toIso8601String() }}">
+                                <time datetime="{{ \Carbon\Carbon::createFromFormat('d/m/Y H:i', $created_at, 'Europe/Madrid')->format('Y-m-d H:i:s') }}">
                                     {{ __('Created at:') }} {{ $created_at }}
                                 </time><br>
-                                <time datetime="{{ \Carbon\Carbon::parse($updated_at)->toIso8601String() }}">
+                                <time datetime="{{ \Carbon\Carbon::createFromFormat('d/m/Y H:i', $updated_at, 'Europe/Madrid')->format('Y-m-d H:i:s') }}">
                                     {{ __('Updated at:') }} {{ $updated_at }}
                                 </time>
                             @endif
